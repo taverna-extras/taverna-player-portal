@@ -12,8 +12,8 @@
 
 <div class="container">
 
-  <p class="bg-success"><%= notice %></p>
-  <p class="bg-danger"><%= alert %></p>
+  <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
+  <% if alert %><div class="alert alert-danger"><%= alert %></div><% end %>
 
   <%= yield %>
 
