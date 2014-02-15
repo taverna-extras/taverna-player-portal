@@ -8,10 +8,16 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%= render 'layouts/navbar' %>
 
-<%= yield %>
+<div class="container">
+
+  <p class="bg-success"><%= notice %></p>
+  <p class="bg-danger"><%= alert %></p>
+
+  <%= yield %>
+
+</div> <!-- /container -->
 
 </body>
 </html>

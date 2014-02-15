@@ -44,4 +44,8 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Auth etc.
 gem 'devise'
+
+# CSS framework
+gem 'bootstrap-sass', '~> 3.1.1'
