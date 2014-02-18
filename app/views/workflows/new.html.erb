@@ -1,0 +1,14 @@
+<h2>Upload Workflow</h2>
+
+<%= form_for(@workflow) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :document, 'Workflow Document' %>
+      <%= f.file_field :document %>
+    </div>
+
+    <%= f.submit "Create", :class => 'btn btn-primary' %>
+<% end %>
+
+<%= link_to 'Cancel', :back, :style => 'btn btn-default btn-xs' %>
+

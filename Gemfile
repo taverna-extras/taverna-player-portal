@@ -49,3 +49,6 @@ gem 'devise'
 
 # CSS framework
 gem 'bootstrap-sass', '~> 3.1.1'
+
+# Attachments
+gem "paperclip", "~> 3.0"
