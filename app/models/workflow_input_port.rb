@@ -1,0 +1,2 @@
+class WorkflowInputPort < WorkflowPort
+end

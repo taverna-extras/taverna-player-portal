@@ -52,3 +52,6 @@ gem 'bootstrap-sass', '~> 3.1.1'
 
 # Attachments
 gem "paperclip", "~> 3.0"
+
+# Parsing t2flow
+gem 'taverna-t2flow'
