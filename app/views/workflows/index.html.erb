@@ -1,0 +1,24 @@
+<h1>Listing workflows</h1>
+
+<% @workflows.each do |workflow| %>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" src="" alt="...">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= link_to workflow.title, workflow -%>
+          <%= render 'buttons', :workflow => workflow, :size => 'btn-group-xs' %>
+        </h4>
+        <p>
+          <%= workflow.description -%>
+        </p>
+      </div>
+    </div>
+<% end %>
+
+<br>
+
+<%= link_to new_workflow_path, :class => 'btn btn-success' do %>
+    <span class="glyphicon glyphicon-plus"></span> New Workflow
+<% end %>

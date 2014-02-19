@@ -7,7 +7,11 @@ Rails4app::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  resources :workflows
+  resources :workflows do
+    member do
+      get 'download'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
