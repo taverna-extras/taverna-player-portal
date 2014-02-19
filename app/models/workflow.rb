@@ -20,27 +20,25 @@ class Workflow < ActiveRecord::Base
     "application/vnd.taverna.t2flow+xml"
   end
 
-  def t2flow
-    @t2flow ||= T2Flow::Parser.new.parse(File.read(document.path))
-  end
-
   private
 
   def parse_workflow_document
-    title = t2flow.annotations.titles.last
-    description = t2flow.annotations.descriptions.last
+    t2flow = T2Flow::Parser.new.parse(document.queued_for_write[:original].read)
 
-    input_ports.destroy_all
-    output_ports.destroy_all
+    self.title = t2flow.annotations.titles.last
+    self.description = t2flow.annotations.descriptions.last
+
+    self.input_ports = []
+    self.output_ports = []
 
     t2flow.sources.each do |input|
-      input_ports.build(:name => input.name,
+      self.input_ports.build(:name => input.name,
                         :description => (input.descriptions || []).last,
                         :example_value => (input.example_values || []).last)
     end
 
     t2flow.sinks.each do |output|
-      output_ports.build(:name => output.name,
+      self.output_ports.build(:name => output.name,
                         :description => (output.descriptions || []).last,
                         :example_value => (output.example_values || []).last)
     end
