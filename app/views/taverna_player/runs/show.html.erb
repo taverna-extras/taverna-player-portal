@@ -10,9 +10,30 @@
   # Author: Robert Haines
 %>
 
-<h1>Run</h1>
+<h1><%= @run.name -%></h1>
 
-<%= render "info", :run => @run %>
+<div id="run-info">
+  <p>
+    <b>Status message:</b>
+    <%= @run.status_message %>
+  </p>
+
+  <p>
+    <b>Create time:</b>
+    <%= @run.create_time %>
+  </p>
+
+  <p>
+    <b>Start time:</b>
+    <%= @run.start_time %>
+  </p>
+
+  <p>
+    <b>Finish time:</b>
+    <%= @run.finish_time %>
+  </p>
+</div>
+
 
 <%= render "button", :run => @run %>
 

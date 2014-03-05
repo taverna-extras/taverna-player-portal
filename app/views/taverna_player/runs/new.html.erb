@@ -1,56 +1,66 @@
 <%
-  # Copyright (c) 2013 The University of Manchester, UK.
-  #
-  # BSD Licenced. See LICENCE.rdoc for details.
-  #
-  # Taverna Player was developed in the BioVeL project, funded by the European
-  # Commission 7th Framework Programme (FP7), through grant agreement
-  # number 283359.
-  #
-  # Author: Robert Haines
+   # Copyright (c) 2013 The University of Manchester, UK.
+   #
+   # BSD Licenced. See LICENCE.rdoc for details.
+   #
+   # Taverna Player was developed in the BioVeL project, funded by the European
+   # Commission 7th Framework Programme (FP7), through grant agreement
+   # number 283359.
+   #
+   # Author: Robert Haines
 %>
 
 <% workflow_title = TavernaPlayer.workflow_proxy.title(@workflow) || "" %>
 <% workflow_inputs = TavernaPlayer.workflow_proxy.inputs(@workflow) %>
 
-<h1>Workflow: &quot;<%= workflow_title %>&quot;</h1>
-<h2>Set inputs</h2>
+<h1>New run <small><%= workflow_title %></small></h1>
 
 <%= form_for @run, :html => {:multipart => true} do |f| %>
-  <%= f.hidden_field :workflow_id %>
-  <%= f.hidden_field :embedded %>
+    <% if @run.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@run.errors.count, "error") %> prohibited this workflow run from being saved:</h2>
 
-  <div>
-    <%= f.label :name, "Run name:" %>
-    <%= f.text_field :name, :value => workflow_title %>
-  </div>
-
-  <% workflow_inputs.each do |input| %>
-    <div>Input: <%= input[:name] %></div>
-
-    <% unless input[:description].blank? %>
-      <div>Description: <%= input[:description] %></div>
+          <ul>
+            <% @run.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
 
-    <% unless input[:example].blank? %>
-      <div>Example value: <%= input[:example] %></div>
-      <div>
-        The example value is automatically entered in the box below.
-        Click to edit or enter a new value directly or choose a file.
-      </div>
-    <% else %>
-      <div>Set this input by entering data directly or choosing a file.</div>
+
+    <%= f.hidden_field :workflow_id %>
+    <%= f.hidden_field :embedded %>
+
+    <div class="form-group">
+      <%= f.label :name, 'Run name' %>
+      <%= f.text_field :name, :value => workflow_title, :class => 'form-control' %>
+    </div>
+
+
+    <% workflow_inputs.each do |input| %>
+        <div class="form-group">
+          <%= label_tag input[:name], input[:name] %>
+
+          <% unless input[:description].blank? %>
+              <p class="help-block"><%= input[:description] %></p>
+          <% end %>
+
+          <%= f.fields_for :inputs, TavernaPlayer::RunPort::Input.new do |input_fields| %>
+              <%= input_fields.hidden_field :name, :value => input[:name] %>
+              <%= input_fields.text_area :value, :value => input[:example], :rows => 3, :class => 'form-control' %>
+              <%= input_fields.file_field :file %>
+          <% end %>
+        </div>
     <% end %>
 
-    <%= f.fields_for :inputs, TavernaPlayer::RunPort::Input.new do |input_fields| %>
-      <%= input_fields.hidden_field :name, :value => input[:name] %>
-      <%= input_fields.text_area :value, :value => input[:example], :rows => 3 %>
-      <%= input_fields.file_field :file %>
-    <% end %>
-  <% end %>
+    <button type="submit" class="btn btn-primary">
+      <span class="glyphicon glyphicon-play"></span> Start Run
+    </button>
 
-  <div><%= f.submit 'Start Run' %></div>
 <% end %>
 <% unless @run.embedded? %>
-  <%= link_to 'Cancel', :back %>
+    <div class="under-form-links">
+      <%= link_to 'Back', :back, :class => 'btn btn-default btn-xs' %>
+    </div>
 <% end %>
