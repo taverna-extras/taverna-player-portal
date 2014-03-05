@@ -12,7 +12,9 @@ class Workflow < ActiveRecord::Base
   has_attached_file :document
 
   validates :title, :presence => true
+
   validates :document, :attachment_presence => true
+  do_not_validate_attachment_file_type :document # Paperclip fails to validate t2flows which are uploaded as 'application/octet-stream'
 
   before_validation :parse_workflow_document
 
@@ -27,24 +29,26 @@ class Workflow < ActiveRecord::Base
   private
 
   def parse_workflow_document
-    t2flow = T2Flow::Parser.new.parse(document.queued_for_write[:original].read)
+    if document.dirty?
+      t2flow = T2Flow::Parser.new.parse(document.queued_for_write[:original].read)
 
-    self.title = t2flow.annotations.titles.last
-    self.description = t2flow.annotations.descriptions.last
+      self.title = t2flow.annotations.titles.last
+      self.description = t2flow.annotations.descriptions.last
 
-    self.input_ports = []
-    self.output_ports = []
+      self.input_ports = []
+      self.output_ports = []
 
-    t2flow.sources.each do |input|
-      self.input_ports.build(:name => input.name,
-                        :description => (input.descriptions || []).last,
-                        :example_value => (input.example_values || []).last)
-    end
+      t2flow.sources.each do |input|
+        self.input_ports.build(:name => input.name,
+                          :description => (input.descriptions || []).last,
+                          :example_value => (input.example_values || []).last)
+      end
 
-    t2flow.sinks.each do |output|
-      self.output_ports.build(:name => output.name,
-                        :description => (output.descriptions || []).last,
-                        :example_value => (output.example_values || []).last)
+      t2flow.sinks.each do |output|
+        self.output_ports.build(:name => output.name,
+                          :description => (output.descriptions || []).last,
+                          :example_value => (output.example_values || []).last)
+      end
     end
   end
 
