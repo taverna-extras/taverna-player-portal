@@ -1,4 +1,8 @@
-rails4app
+Workflow Portal
 =========
 
-Testing Rails 4
+* Rails 4
+* Devise
+* Bootstrap
+* Paperclip
+* Taverna Player

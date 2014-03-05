@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rails4app::Application.load_tasks
+WorkflowPortal::Application.load_tasks

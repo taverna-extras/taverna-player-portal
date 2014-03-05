@@ -1,4 +1,4 @@
-Rails4app::Application.routes.draw do
+WorkflowPortal::Application.routes.draw do
 
   mount TavernaPlayer::Engine, :at => "/"
 
