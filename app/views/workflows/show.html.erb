@@ -8,3 +8,16 @@
   <%= @workflow.description -%>
 </p>
 
+<h4>Inputs</h4>
+<ul>
+  <% @workflow.input_ports.each do |input_port| %>
+      <li><%= input_port.name %></li>
+  <% end %>
+</ul>
+
+<h4>Outputs</h4>
+<ul>
+  <% @workflow.output_ports.each do |output_port| %>
+      <li><%= output_port.name %></li>
+  <% end %>
+</ul>

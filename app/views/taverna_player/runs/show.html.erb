@@ -1,0 +1,29 @@
+<%
+  # Copyright (c) 2013 The University of Manchester, UK.
+  #
+  # BSD Licenced. See LICENCE.rdoc for details.
+  #
+  # Taverna Player was developed in the BioVeL project, funded by the European
+  # Commission 7th Framework Programme (FP7), through grant agreement
+  # number 283359.
+  #
+  # Author: Robert Haines
+%>
+
+<h1>Run</h1>
+
+<%= render "info", :run => @run %>
+
+<%= render "button", :run => @run %>
+
+<% if @run.inputs.size > 0 %>
+  <%= render "inputs", :run => @run %>
+<% end %>
+
+<%= render "interaction", :run => @run, :interaction => @interaction %>
+
+<%= render "outputs", :run => @run %>
+
+<% unless @run.complete? %>
+  <%= render "poll", :reload => run_path(@run) %>
+<% end %>

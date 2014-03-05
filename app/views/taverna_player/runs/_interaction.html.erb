@@ -1,0 +1,74 @@
+<%
+  # Copyright (c) 2013 The University of Manchester, UK.
+  #
+  # BSD Licenced. See LICENCE.rdoc for details.
+  #
+  # Taverna Player was developed in the BioVeL project, funded by the European
+  # Commission 7th Framework Programme (FP7), through grant agreement
+  # number 283359.
+  #
+  # Author: Robert Haines
+%>
+
+<div id="run-interaction">
+  <% unless interaction.nil? %>
+
+    <%= javascript_tag do %>
+    var inputData = <%= raw(interaction.data) %>;
+
+    function registerCalls() {
+      pmrpc.register({
+        publicProcedureName : "reply",
+        procedure : function(status, results) {
+          interaction_reply('<%= "#{run_url(run)}/interaction/#{interaction.serial}" %>', status, results);
+          return "OK";
+        }
+      });
+
+      pmrpc.register({
+        publicProcedureName : "getParameterValue",
+        procedure : function(parameterName) {
+          return getParameterValue(parameterName);
+        }
+      });
+
+      pmrpc.register({
+        publicProcedureName : "getInputData",
+        procedure : function() {
+          return inputData;
+        }
+      });
+
+      pmrpc.register( {
+        publicProcedureName : "getWorkflowRunId",
+        procedure : function () {
+          return "<%= run.run_id %>";
+        }
+      });
+
+      pmrpc.register( {
+        publicProcedureName : "setTitle",
+        procedure : function(title) {
+          // This method is called by an interaction to set its title.
+          // It must be registered but doesn't need to do anything if you
+          // don't want it to.
+
+          //document.title = title;
+
+          // This method must return "OK".
+          return "OK";
+        }
+      });
+    }
+
+    jQuery(document).ready(
+      function() {
+        registerCalls();
+      }
+    );
+    <% end %>
+
+    <%= content_tag(:iframe, "", { :width => "100%", :height => "500px",
+      :src => interaction_redirect(interaction) }) %>
+  <% end %>
+</div>

@@ -5,4 +5,8 @@ class WorkflowPort < ActiveRecord::Base
   belongs_to :workflow
   validates :name, :presence => true
 
+  def example
+    self.example_value
+  end
+
 end

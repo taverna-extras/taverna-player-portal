@@ -51,7 +51,10 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # Attachments
-gem "paperclip", "~> 3.0"
+gem "paperclip"
 
 # Parsing t2flow
 gem 'taverna-t2flow'
+
+# Executing workflows
+gem 'taverna-player'

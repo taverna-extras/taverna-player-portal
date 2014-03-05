@@ -20,6 +20,10 @@ class Workflow < ActiveRecord::Base
     "application/vnd.taverna.t2flow+xml"
   end
 
+  def file_path
+    self.document.path
+  end
+
   private
 
   def parse_workflow_document

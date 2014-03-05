@@ -1,0 +1,56 @@
+<%
+  # Copyright (c) 2013 The University of Manchester, UK.
+  #
+  # BSD Licenced. See LICENCE.rdoc for details.
+  #
+  # Taverna Player was developed in the BioVeL project, funded by the European
+  # Commission 7th Framework Programme (FP7), through grant agreement
+  # number 283359.
+  #
+  # Author: Robert Haines
+%>
+
+<div id="run-info">
+  <p>
+    <b>Run:</b>
+    <%= run.run_id %>
+  </p>
+
+  <p>
+    <b>Name:</b>
+    <%= form_for run, :html => {:multipart => true} do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit "Update" %>
+    <% end %>
+  </p>
+
+  <p>
+    <b>State:</b>
+    <%= run.state %>
+  </p>
+
+  <p>
+    <b>Status message:</b>
+    <%= run.status_message %>
+  </p>
+
+  <p>
+    <b>Create time:</b>
+    <%= run.create_time %>
+  </p>
+
+  <p>
+    <b>Start time:</b>
+    <%= run.start_time %>
+  </p>
+
+  <p>
+    <b>Finish time:</b>
+    <%= run.finish_time %>
+  </p>
+
+  <p>
+    <b>Embedded:</b>
+    <%= run.embedded %>
+  </p>
+</div>

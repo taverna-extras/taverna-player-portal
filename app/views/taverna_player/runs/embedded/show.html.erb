@@ -1,0 +1,39 @@
+<%
+  # Copyright (c) 2013 The University of Manchester, UK.
+  #
+  # BSD Licenced. See LICENCE.rdoc for details.
+  #
+  # Taverna Player was developed in the BioVeL project, funded by the European
+  # Commission 7th Framework Programme (FP7), through grant agreement
+  # number 283359.
+  #
+  # Author: Robert Haines
+%>
+
+<h1>Embedded Run</h1>
+
+<%= render "taverna_player/runs/embedded/info", :run => @run %>
+
+<%= render "taverna_player/runs/embedded/button", :run => @run %>
+
+<% if @run.inputs.size > 0 %>
+  <%= render "taverna_player/runs/embedded/inputs", :run => @run %>
+<% end %>
+
+<%
+  # Note that the base run/interaction partial is used here. You can still
+  # override it in the embedded directory if you wish but you will need to
+  # change the file name below AND in embedded/show.js.erb.
+%>
+<%= render "interaction", :run => @run, :interaction => @interaction %>
+
+<%= render "taverna_player/runs/embedded/outputs", :run => @run %>
+
+<%
+  # Note that the base run/poll partial is used here. You can still
+  # override it in the embedded directory if you wish but you will need to
+  # change the file name below AND in embedded/show.js.erb.
+%>
+<% unless @run.complete? %>
+  <%= render "poll", :reload => run_path(@run) %>
+<% end %>

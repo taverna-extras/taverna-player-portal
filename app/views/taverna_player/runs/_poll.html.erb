@@ -1,0 +1,27 @@
+<%
+  # Copyright (c) 2013 The University of Manchester, UK.
+  #
+  # BSD Licenced. See LICENCE.rdoc for details.
+  #
+  # Taverna Player was developed in the BioVeL project, funded by the European
+  # Commission 7th Framework Programme (FP7), through grant agreement
+  # number 283359.
+  #
+  # Author: Robert Haines
+%>
+
+<div id="run-poll">
+  <%= javascript_tag do %>
+    var poll_interval = <%= TavernaPlayer.server_poll_interval * 2000 %>
+
+    jQuery(document).ready(
+      function() {
+        window.setTimeout("poll_run()", poll_interval)
+      }
+    );
+
+    function poll_run() {
+      jQuery.get("<%= reload %>", null, null, "script")
+    }
+  <% end %>
+</div>

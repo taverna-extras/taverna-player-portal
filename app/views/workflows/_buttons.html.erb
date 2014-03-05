@@ -2,6 +2,10 @@
 <% float ||= 'pull-right' %>
 
 <div class="btn-group <%= size -%> <%= float -%>">
+  <%= link_to taverna_player.new_run_path(:workflow_id => workflow.id), :class => 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-play"></span> Run
+  <% end %>
+
   <%= link_to download_workflow_path(workflow), :class => 'btn btn-default' do %>
       <span class="glyphicon glyphicon-download"></span> Download
   <% end %>
