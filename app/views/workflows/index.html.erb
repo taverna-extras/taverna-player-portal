@@ -1,5 +1,9 @@
 <h1>Workflows</h1>
 
+<%= link_to new_workflow_path, :class => 'btn btn-success' do %>
+    <span class="glyphicon glyphicon-plus"></span> New Workflow
+<% end %>
+
 <% @workflows.each do |workflow| %>
     <div class="media">
       <a class="pull-left" href="#">
@@ -18,7 +22,3 @@
 <% end %>
 
 <br>
-
-<%= link_to new_workflow_path, :class => 'btn btn-success' do %>
-    <span class="glyphicon glyphicon-plus"></span> New Workflow
-<% end %>
