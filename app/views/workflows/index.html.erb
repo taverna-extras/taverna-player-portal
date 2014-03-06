@@ -1,13 +1,17 @@
-<h1>Workflows</h1>
+<div class="page-header">
+  <h1>Workflows</h1>
+</div>
 
-<%= link_to new_workflow_path, :class => 'btn btn-success' do %>
-    <span class="glyphicon glyphicon-plus"></span> New Workflow
-<% end %>
+<div class="clearfix">
+  <%= link_to new_workflow_path, :class => 'btn btn-success pull-right' do %>
+      <span class="glyphicon glyphicon-plus"></span> New Workflow
+  <% end %>
+</div>
 
 <% @workflows.each do |workflow| %>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="" alt="...">
+        <%= image_tag 'taverna_logo.png', :class => 'media-object', :alt => 'Taverna logo' -%>
       </a>
       <div class="media-body">
         <h4 class="media-heading">
@@ -15,7 +19,7 @@
           <%= render 'buttons', :workflow => workflow, :size => 'btn-group-xs' %>
         </h4>
         <p>
-          <%= workflow.description -%>
+          <%= truncate(workflow.description, :length => 200, :separator => ' ') -%>
         </p>
       </div>
     </div>
