@@ -1,13 +1,13 @@
 <%
-  # Copyright (c) 2013 The University of Manchester, UK.
-  #
-  # BSD Licenced. See LICENCE.rdoc for details.
-  #
-  # Taverna Player was developed in the BioVeL project, funded by the European
-  # Commission 7th Framework Programme (FP7), through grant agreement
-  # number 283359.
-  #
-  # Author: Robert Haines
+   # Copyright (c) 2013 The University of Manchester, UK.
+   #
+   # BSD Licenced. See LICENCE.rdoc for details.
+   #
+   # Taverna Player was developed in the BioVeL project, funded by the European
+   # Commission 7th Framework Programme (FP7), through grant agreement
+   # number 283359.
+   #
+   # Author: Robert Haines
 %>
 
 <div class="page-header">
@@ -15,23 +15,34 @@
 </div>
 
 <table class="table table-striped">
+  <colgroup>
+    <col span="1" style="width: 50%;">
+    <col span="1" style="width: 5%;">
+    <col span="1" style="width: 20%;">
+    <col span="1" style="width: 20%;">
+    <col span="1" style="width: 5%;">
+  </colgroup>
+  <thead>
   <tr>
     <th>Name</th>
     <th>State</th>
     <th>Create time</th>
-    <th>Start time</th>
     <th>Finish time</th>
     <th></th>
   </tr>
-
-<% @runs.each do |run| %>
-  <tr>
-    <td><%= link_to run.name, run %></td>
-    <td><%= run_state_icon(run) -%></td>
-    <td><%= run.create_time %></td>
-    <td><%= run.start_time %></td>
-    <td><%= run.finish_time %></td>
-    <td><%= render "button", :run => run %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @runs.each do |run| %>
+      <tr>
+        <td>
+          <%= link_to run.name, run %><br/>
+          <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'small-workflow-link' %>
+        </td>
+        <td><%= run_state_icon(run) -%></td>
+        <td><%= run.create_time %></td>
+        <td><%= run.finish_time %></td>
+        <td><%= render "button", :run => run %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
