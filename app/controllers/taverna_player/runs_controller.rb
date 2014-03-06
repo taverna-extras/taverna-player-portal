@@ -15,4 +15,10 @@ class TavernaPlayer::RunsController < ApplicationController
   include TavernaPlayer::Concerns::Controllers::RunsController
 
   # Extend the RunsController here.
+
+  alias_method :old_run_params, :run_params
+
+  def run_params
+    old_run_params.merge(:user_id => current_user.id)
+  end
 end
