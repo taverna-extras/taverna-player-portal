@@ -1,0 +1,14 @@
+<% port_type = port.is_a?(TavernaPlayer::RunPort::Input) ? 'input' : 'output' %>
+
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <%= port.display_name -%>
+    <span class="muted"><%= "(#{port.metadata[:type]})" if port.metadata && port.depth == 0 %></span>
+    <%= link_to  run_path(port.run) + "/download/#{port_type}/#{port.name}", :class => 'btn btn-xs btn-default pull-right' do %>
+        <span class="glyphicon glyphicon-download-alt"></span> Download
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <%= TavernaPlayer.port_renderer.render(port) %>
+  </div>
+</div>

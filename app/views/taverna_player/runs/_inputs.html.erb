@@ -11,24 +11,11 @@
 %>
 
 <div id="run-inputs">
-  <h2>Inputs</h2>
+  <h2 class="expandable-section-heading" data-toggle="collapse" data-target="#inputs">Inputs <span class="caret"></span></h2>
 
-  <% run.inputs.each do |input| %>
-    <p>
-      <b>Name:</b>
-      <%= input.display_name %>
-    </p>
-
-    <% if input.file.blank? %>
-    <p>
-      <b>Value:</b>
-      <%= input.value %>
-    </p>
-    <% else %>
-    <p>
-      <b>File:</b>
-      <%= link_to input.file_file_name, input.file.url %>
-    </p>
-    <% end %>
-  <% end%>
+  <div id="inputs"  class="collapse">
+    <% run.inputs.each do |input| %>
+        <%= render 'port', :port => input %>
+    <% end%>
+  </div>
 </div>

@@ -36,7 +36,7 @@
       <tr>
         <td>
           <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
-          <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'small-workflow-link' %>
+          <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
         </td>
         <td class="vert-middle"><%= User.find(run.user_id).name -%></td>
         <td class="vert-middle"><%= run.create_time %></td>
