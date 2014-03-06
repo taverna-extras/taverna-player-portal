@@ -1,12 +1,36 @@
 <h1>Editing workflow</h1>
 
-<%= render 'form' %>
+<%= form_for(@workflow) do |f| %>
+    <% if @workflow.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@workflow.errors.count, "error") %> prohibited this workflow from being saved:</h2>
+
+          <ul>
+            <% @workflow.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, :class => 'form-control' %>
+    </div>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
 
 <h3>Delete Workflow</h3>
 <p>
-    <%= link_to @workflow, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
-        <span class="glyphicon glyphicon-trash"></span> Delete
-    <% end %>
+  <%= link_to @workflow, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
+      <span class="glyphicon glyphicon-trash"></span> Delete
+  <% end %>
 </p>
 
 <div class="under-form-links">

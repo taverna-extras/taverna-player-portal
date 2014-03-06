@@ -1,6 +1,26 @@
 <h1>New workflow</h1>
 
-<%= render 'form' %>
+<%= form_for(@workflow) do |f| %>
+    <% if @workflow.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@workflow.errors.count, "error") %> prohibited this workflow from being saved:</h2>
+
+          <ul>
+            <% @workflow.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :document, 'Workflow Document' %>
+      <p class="help-block">Select a t2flow file from your computer to upload.</p>
+      <%= f.file_field :document %>
+    </div>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
 
 <div class="under-form-links">
   <%= link_to 'Cancel', workflows_path, :class => 'btn btn-default btn-xs' %>
