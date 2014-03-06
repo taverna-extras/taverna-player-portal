@@ -10,20 +10,32 @@
 
 <br/>
 
-<p>
-  <%= @workflow.description -%>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        <%= @workflow.description -%>
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h4>Inputs</h4>
+      <ul>
+        <% @workflow.input_ports.each do |input_port| %>
+            <li><%= input_port.name %></li>
+        <% end %>
+      </ul>
 
-<h4>Inputs</h4>
-<ul>
-  <% @workflow.input_ports.each do |input_port| %>
-      <li><%= input_port.name %></li>
-  <% end %>
-</ul>
-
-<h4>Outputs</h4>
-<ul>
-  <% @workflow.output_ports.each do |output_port| %>
-      <li><%= output_port.name %></li>
-  <% end %>
-</ul>
+      <h4>Outputs</h4>
+      <ul>
+        <% @workflow.output_ports.each do |output_port| %>
+            <li><%= output_port.name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-8">
+      <%= image_tag @workflow.diagram.url(:large) -%>
+    </div>
+  </div>
+</div>

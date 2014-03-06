@@ -11,7 +11,7 @@
 <% @workflows.each do |workflow| %>
     <div class="media">
       <a class="pull-left" href="#">
-        <%= image_tag 'taverna_logo.png', :class => 'media-object', :alt => 'Taverna logo' -%>
+        <%= image_tag workflow.diagram.url(:thumb), :class => 'media-object', :alt => 'Workflow diagram' -%>
       </a>
       <div class="media-body">
         <h4 class="media-heading">
@@ -19,7 +19,7 @@
           <%= render 'buttons', :workflow => workflow, :size => 'btn-group-xs' %>
         </h4>
         <p>
-          <%= truncate(workflow.description, :length => 200, :separator => ' ') -%>
+          <%= truncate(workflow.description, :length => 400, :separator => ' ') -%>
         </p>
       </div>
     </div>

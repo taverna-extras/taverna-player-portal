@@ -13,6 +13,7 @@ WorkflowPortal::Application.routes.draw do
   resources :workflows do
     member do
       get 'download'
+      get 'diagram'
     end
   end
 
