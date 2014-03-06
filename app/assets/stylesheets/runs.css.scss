@@ -1,19 +1,21 @@
+@import "bootstrap";
+
 .state-pending {
-  color: #555555;
+  color: $gray;
 }
 
 .state-running {
-  color: #000000;
+  color: $brand-primary;
 }
 
 .state-finished {
-  color: #7fd240;
+  color: $brand-success;
 }
 
 .state-cancelled {
-  color: #999999;
+  color: $gray-light;
 }
 
 .state-failed {
-  color: #cd3e2e;
+  color: $brand-danger;
 }
