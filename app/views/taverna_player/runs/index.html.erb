@@ -16,16 +16,16 @@
 
 <table class="table table-striped">
   <colgroup>
-    <col span="1" style="width: 50%;">
-    <col span="1" style="width: 5%;">
-    <col span="1" style="width: 20%;">
-    <col span="1" style="width: 20%;">
-    <col span="1" style="width: 5%;">
+    <col span="1" style="width: 46%;">
+    <col span="1" style="width: 15%;">
+    <col span="1" style="width: 18%;">
+    <col span="1" style="width: 18%;">
+    <col span="1" style="width: 3%;">
   </colgroup>
   <thead>
   <tr>
     <th>Name</th>
-    <th>State</th>
+    <th>User</th>
     <th>Create time</th>
     <th>Finish time</th>
     <th></th>
@@ -35,10 +35,10 @@
   <% @runs.each do |run| %>
       <tr>
         <td>
-          <%= link_to run.name, run %><br/>
+          <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
           <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'small-workflow-link' %>
         </td>
-        <td class="vert-middle" style="text-align: center"><%= run_state_icon(run) -%></td>
+        <td class="vert-middle"><%= User.find(run.user_id).name -%></td>
         <td class="vert-middle"><%= run.create_time %></td>
         <td class="vert-middle"><%= run.finish_time %></td>
         <td class="vert-middle"><%= render "button", :run => run %></td>
