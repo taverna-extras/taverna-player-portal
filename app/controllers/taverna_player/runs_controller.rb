@@ -21,4 +21,10 @@ class TavernaPlayer::RunsController < ApplicationController
   def run_params
     old_run_params.merge(:user_id => current_user.id)
   end
+
+  def find_runs
+    select = { :embedded => false }
+    select[:workflow_id] = params[:workflow_id] if params[:workflow_id]
+    @runs = Run.where(select).order("created_at DESC")
+  end
 end
