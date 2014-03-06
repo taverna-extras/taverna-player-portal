@@ -38,10 +38,10 @@
           <%= link_to run.name, run %><br/>
           <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'small-workflow-link' %>
         </td>
-        <td><%= run_state_icon(run) -%></td>
-        <td><%= run.create_time %></td>
-        <td><%= run.finish_time %></td>
-        <td><%= render "button", :run => run %></td>
+        <td class="vert-middle" style="text-align: center"><%= run_state_icon(run) -%></td>
+        <td class="vert-middle"><%= run.create_time %></td>
+        <td class="vert-middle"><%= run.finish_time %></td>
+        <td class="vert-middle"><%= render "button", :run => run %></td>
       </tr>
   <% end %>
   </tbody>

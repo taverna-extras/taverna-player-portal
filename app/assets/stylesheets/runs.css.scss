@@ -20,7 +20,11 @@
   color: $brand-danger;
 }
 
-.small-workflow-link {
+a.small-workflow-link {
   font-size: 80%;
   color: $gray-light;
+}
+
+.table td.vert-middle {
+  vertical-align: middle;
 }
