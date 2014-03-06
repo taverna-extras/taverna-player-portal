@@ -2,19 +2,27 @@ module RunsHelper
   include TavernaPlayer::RunsHelper
 
   def run_state_icon(run)
-    icon = case run.state
+    icon = nil
+    colour = nil
+
+    case run.state
       when :pending
-        'glyphicon-time'
+        icon = 'glyphicon-time'
+        colour = 'state-pending'
       when :running
-        'glyphicon-ok-circle'
+        icon = 'glyphicon-ok-circle'
+        colour = 'state-pending'
       when :failed
-        'glyphicon-remove-circle'
+        icon = 'glyphicon-remove-circle'
+        colour = 'state-failed'
       when :cancelled
-        'glyphicon-ban-circle'
+        icon = 'glyphicon-ban-circle'
+        colour = 'state-cancelled'
       when :finished
-        'glyphicon-ok-circle'
+        icon = 'glyphicon-ok-circle'
+        colour = 'state-finished'
     end
 
-    content_tag('span', nil, :class => "glyphicon #{icon}", :title => run.saved_state.to_s.humanize)
+    content_tag('span', nil, :class => "glyphicon #{icon} #{colour}", :title => run.saved_state.to_s.humanize)
   end
 end
