@@ -17,28 +17,9 @@
     <b>Workflow:</b>
     <%= link_to @run.workflow.title, main_app.workflow_path(@run.workflow) -%>
   </p>
-
-  <p>
-    <b>Status:</b>
-    <%= @run.status_message -%> <%= run_state_icon(@run) -%>
-  </p>
-
-  <p>
-    <b>Create time:</b>
-    <%= @run.create_time %>
-  </p>
-
-  <p>
-    <b>Start time:</b>
-    <%= @run.start_time %>
-  </p>
-
-  <p>
-    <b>Finish time:</b>
-    <%= @run.finish_time %>
-  </p>
 </div>
 
+<%= render 'status', :run => @run %>
 
 <%= render "button", :run => @run %>
 

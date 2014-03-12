@@ -10,7 +10,7 @@
   # Author: Robert Haines
 %>
 
-jQuery("#run-info").replaceWith('<%= escape_javascript(render("info", :run => @run)) %>');
+jQuery("#run-status").replaceWith('<%= escape_javascript(render("status", :run => @run)) %>');
 
 jQuery("#run-button").replaceWith('<%= escape_javascript(render("button", :run => @run)) %>');
 
