@@ -44,7 +44,7 @@ class Workflow < ActiveRecord::Base
       self.diagram = diagram
       diagram.close
 
-      self.title = t2flow.annotations.titles.last
+      self.title = t2flow.annotations.titles.last || 'Untitled workflow'
       self.description = t2flow.annotations.descriptions.last
 
       self.input_ports = []
