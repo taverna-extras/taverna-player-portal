@@ -21,6 +21,8 @@
         publicProcedureName : "reply",
         procedure : function(status, results) {
           interaction_reply('<%= "#{run_url(run)}/interaction/#{interaction.serial}" %>', status, results);
+          $('#interaction-modal').modal('hide');
+          $('#interaction-button').hide();
           return "OK";
         }
       });
@@ -56,6 +58,7 @@
           //document.title = title;
 
           // This method must return "OK".
+          $('#interaction-title').html(title);
           return "OK";
         }
       });
@@ -64,11 +67,26 @@
     jQuery(document).ready(
       function() {
         registerCalls();
+        $('#interaction-modal').modal('show');
       }
     );
     <% end %>
+      <br/>
+      <button id="interaction-button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#interaction-modal">Show interaction</button>
 
-    <%= content_tag(:iframe, "", { :width => "100%", :height => "500px",
-      :src => interaction_redirect(interaction) }) %>
+      <div id="interaction-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="interaction-title" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="interaction-title">Interaction</h4>
+            </div>
+            <div class="modal-body">
+              <%= content_tag(:iframe, "", { :width => "100%", :height => "500px", :src => interaction_redirect(interaction) }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
   <% end %>
 </div>
