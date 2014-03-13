@@ -14,3 +14,9 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryGirl::Syntax::Methods
 end
+
+FactoryGirl.define do
+  sequence :email do |n|
+    "person#{n}@example.com"
+  end
+end
