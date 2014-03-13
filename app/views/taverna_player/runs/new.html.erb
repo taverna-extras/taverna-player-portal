@@ -43,7 +43,7 @@
           <%= label_tag input[:name], input[:name] %>
 
           <% unless input[:description].blank? %>
-              <p class="help-block"><%= input[:description] %></p>
+              <p class="help-block"><%= simple_format input[:description] %></p>
           <% end %>
 
           <%= f.fields_for :inputs, TavernaPlayer::RunPort::Input.new do |input_fields| %>
