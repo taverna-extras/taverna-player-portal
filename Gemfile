@@ -57,7 +57,7 @@ gem "paperclip"
 gem 'taverna-t2flow'
 
 # Executing workflows
-gem 'taverna-player'
+gem 'taverna-player', :git=>"git://github.com/myGrid/taverna-player.git", :branch => 'rails4'
 
 group :test do
   gem "factory_girl_rails", "~> 4.0"
