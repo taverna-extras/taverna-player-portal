@@ -15,6 +15,10 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 end
 
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
+
 FactoryGirl.define do
   sequence :email do |n|
     "person#{n}@example.com"
