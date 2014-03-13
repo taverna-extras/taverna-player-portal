@@ -15,6 +15,8 @@ WorkflowPortal::Application.routes.draw do
       get 'download'
       get 'diagram'
     end
+
+    resources :runs, :controller => 'taverna_player/runs'
   end
 
   # Example of regular route:
