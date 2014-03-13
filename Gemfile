@@ -58,3 +58,7 @@ gem 'taverna-t2flow'
 
 # Executing workflows
 gem 'taverna-player'
+
+group :test do
+  gem "factory_girl_rails", "~> 4.0"
+end
