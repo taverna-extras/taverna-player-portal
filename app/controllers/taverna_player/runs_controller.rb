@@ -19,7 +19,9 @@ class TavernaPlayer::RunsController < ApplicationController
   alias_method :old_run_params, :run_params
 
   def run_params
-    old_run_params.merge(:user_id => current_user.id)
+    p = old_run_params
+    p.merge(:user_id => current_user.id) if user_signed_in?
+    p
   end
 
   def find_runs
