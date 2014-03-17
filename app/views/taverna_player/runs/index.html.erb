@@ -14,37 +14,14 @@
   <h1>Runs</h1>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-striped">
-    <colgroup>
-      <col span="1" style="width: 46%;">
-      <col span="1" style="width: 15%;">
-      <col span="1" style="width: 18%;">
-      <col span="1" style="width: 18%;">
-      <col span="1" style="width: 3%;">
-    </colgroup>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>User</th>
-      <th>Create time</th>
-      <th>Finish time</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @runs.each do |run| %>
-        <tr>
-          <td>
-            <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
-            <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
-          </td>
-          <td class="vert-middle"><%= run.user ? run.user.name : 'Guest' -%></td>
-          <td class="vert-middle"><%= run.create_time %></td>
-          <td class="vert-middle"><%= run.finish_time %></td>
-          <td class="vert-middle"><%= render "button", :run => run %></td>
-        </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+<% @runs.each do |run| %>
+    <div class="row separated">
+      <div class="col-xs-12 col-md-7">
+        <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
+        <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
+      </div>
+      <div class="col-xs-4 col-md-2"><%= run.user ? run.user.name : 'Guest' -%></div>
+      <div class="col-xs-6 col-md-2 text-right"><%= time_ago_in_words run.create_time %> ago</div>
+      <div class="col-xs-2 col-md-1"><%= render "button", :run => run %></div>
+    </div>
+<% end %>

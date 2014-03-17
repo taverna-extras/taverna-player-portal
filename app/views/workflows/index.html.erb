@@ -9,18 +9,28 @@
 </div>
 
 <% @workflows.each do |workflow| %>
-    <div class="media">
+    <div class="media separated">
       <%= link_to workflow, :class => 'pull-left' do %>
-        <%= image_tag workflow.diagram.url(:thumb), :class => 'media-object', :alt => 'Workflow diagram' -%>
+          <%= image_tag workflow.diagram.url(:thumb), :class => 'media-object', :alt => 'Workflow diagram' -%>
       <% end %>
       <div class="media-body">
-        <h4 class="media-heading">
-          <%= link_to workflow.title, workflow -%>
-          <%= render 'buttons', :workflow => workflow, :size => 'btn-group-sm' %>
-        </h4>
-        <p>
-          <%= truncate(workflow.description, :length => 400, :separator => ' ') -%>
-        </p>
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="media-heading">
+              <%= link_to workflow.title, workflow -%>
+            </h4>
+          </div>
+          <div class="col-md-4">
+            <%= render 'buttons', :workflow => workflow, :size => 'btn-group-sm', :float => '' %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <%= truncate(workflow.description, :length => 400, :separator => ' ') -%>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 <% end %>
