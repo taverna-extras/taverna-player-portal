@@ -64,6 +64,8 @@ class WorkflowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workflow_params
-      params.require(:workflow).permit(:document, :title, :description).merge(:user_id => current_user.id)
+      p = params.require(:workflow).permit(:document, :title, :description)
+      p.merge(:user_id => current_user.id) if user_signed_in?
+      p
     end
 end
