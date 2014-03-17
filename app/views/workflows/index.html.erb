@@ -16,7 +16,7 @@
       <div class="media-body">
         <h4 class="media-heading">
           <%= link_to workflow.title, workflow -%>
-          <%= render 'buttons', :workflow => workflow, :size => 'btn-group-xs' %>
+          <%= render 'buttons', :workflow => workflow, :size => 'btn-group-sm' %>
         </h4>
         <p>
           <%= truncate(workflow.description, :length => 400, :separator => ' ') -%>

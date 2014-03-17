@@ -2,17 +2,17 @@
 <% float ||= 'pull-right' %>
 
 <div class="btn-group <%= size -%> <%= float -%>">
-  <%= link_to new_workflow_run_path(:workflow_id => workflow.id), :class => 'btn btn-default' do %>
+  <%= link_to new_workflow_run_path(:workflow_id => workflow.id), :class => 'btn btn-default', :title => 'Run' do %>
       <span class="glyphicon glyphicon-play"></span> Run
   <% end %>
 
-  <%= link_to download_workflow_path(workflow), :class => 'btn btn-default' do %>
-      <span class="glyphicon glyphicon-download-alt"></span> Download
+  <%= link_to download_workflow_path(workflow), :class => 'btn btn-default', :title => 'Download' do %>
+      <span class="glyphicon glyphicon-download-alt"></span> <span class="hidden-xs">Download</span>
   <% end %>
 
   <% if workflow.user == current_user %>
-      <%= link_to edit_workflow_path(workflow), :class => 'btn btn-default' do %>
-          <span class="glyphicon glyphicon-wrench"></span> Manage
+      <%= link_to edit_workflow_path(workflow), :class => 'btn btn-default', :title => 'Manage' do %>
+          <span class="glyphicon glyphicon-wrench"></span> <span class="hidden-xs">Manage</span>
       <% end %>
   <% end %>
 </div>
