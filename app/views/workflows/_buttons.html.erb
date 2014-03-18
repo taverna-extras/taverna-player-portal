@@ -1,7 +1,6 @@
 <% size ||= '' %>
-<% float ||= 'pull-right' %>
 
-<div class="btn-group <%= size -%> <%= float -%>">
+<div class="btn-group <%= size -%>">
   <%= link_to new_workflow_run_path(:workflow_id => workflow.id), :class => 'btn btn-default', :title => 'Run' do %>
       <span class="glyphicon glyphicon-play"></span> Run
   <% end %>
