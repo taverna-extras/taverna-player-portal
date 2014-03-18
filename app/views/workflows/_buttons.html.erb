@@ -10,7 +10,7 @@
       <span class="glyphicon glyphicon-download-alt"></span> <span class="hidden-xs">Download</span>
   <% end %>
 
-  <% if workflow.user == current_user %>
+  <% if can?(:manage, workflow) %>
       <%= link_to edit_workflow_path(workflow), :class => 'btn btn-default', :title => 'Manage' do %>
           <span class="glyphicon glyphicon-wrench"></span> <span class="hidden-xs">Manage</span>
       <% end %>

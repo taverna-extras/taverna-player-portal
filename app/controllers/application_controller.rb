@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :name
   end
 
+  def authorize(condition)
+    unless condition
+      render 'errors/unauthorized', :status => :unauthorized
+    end
+  end
+
 end

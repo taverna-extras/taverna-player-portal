@@ -12,7 +12,7 @@
 
 jQuery("#run-status").replaceWith('<%= escape_javascript(render("status", :run => @run)) %>');
 
-jQuery("#run-button").replaceWith('<%= escape_javascript(render("button", :run => @run)) %>');
+jQuery("#run-buttons").replaceWith('<%= escape_javascript(render("buttons", :run => @run)) %>');
 
 <% if @interaction.nil? || @new_interaction %>
   jQuery("#run-interaction").replaceWith('<%= escape_javascript(render("interaction", :run => @run, :interaction => @interaction)) %>');
