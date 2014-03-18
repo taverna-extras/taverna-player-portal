@@ -13,14 +13,14 @@
 <div id="run-button">
 
   <% if run.complete? %>
-      <%= link_to run, method: :delete, data: { confirm: 'Are you sure?' },
+      <%= link_to run, method: :delete, data: { confirm: 'Are you sure you want to delete this run?' },
                   :class => 'btn btn-xs btn-danger', :title => 'Delete' do %>
-          <span class="glyphicon glyphicon-trash"></span> <span class="hidden-xs">Delete</span>
+          <span class="glyphicon glyphicon-trash"></span> Delete
       <% end %>
   <% else %>
-      <%= link_to cancel_run_path(run.id), method: :put, data: { confirm: 'Are you sure?' },
+      <%= link_to cancel_run_path(run.id), method: :put, data: { confirm: 'Are you sure you want to cancel this run?' },
                   :class => 'btn btn-xs btn-danger', :title => 'Cancel' do %>
-          <span class="glyphicon glyphicon-ban-circle"></span> <span class="hidden-xs">Cancel</span>
+          <span class="glyphicon glyphicon-ban-circle"></span> Cancel
       <% end %>
   <% end %>
 </div>
