@@ -9,10 +9,19 @@ class WorkflowsControllerTest < ActionController::TestCase
 
   test "should get edit form" do
     workflow = create(:workflow)
+    sign_in workflow.user
 
     get :edit, :id => workflow.id
 
     assert_response :success
+  end
+
+  test "shouldn't get edit form if unauthorized" do
+    workflow = create(:workflow)
+
+    get :edit, :id => workflow.id
+
+    assert_response :unauthorized
   end
 
   test "should create workflow" do
@@ -36,6 +45,18 @@ class WorkflowsControllerTest < ActionController::TestCase
     assert_equal 'New title', assigns(:workflow).title
   end
 
+  test "shouldn't update workflow if unauthorized" do
+    workflow = create(:workflow)
+    sign_in create(:user)
+
+    old_title = workflow.title
+
+    patch :update, :id => workflow.id, :workflow => {:title => 'New title'}
+
+    assert_response :unauthorized
+    assert_equal old_title, assigns(:workflow).title
+  end
+
   test "should delete workflow" do
     workflow = create(:workflow)
     sign_in workflow.user
@@ -43,6 +64,15 @@ class WorkflowsControllerTest < ActionController::TestCase
     delete :destroy, :id => workflow.id
 
     assert_redirected_to workflows_url
+  end
+
+  test "shouldn't delete workflow if unauthorized" do
+    workflow = create(:workflow)
+    sign_in create(:user)
+
+    delete :destroy, :id => workflow.id
+
+    assert_response :unauthorized
   end
 
 end
