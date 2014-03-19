@@ -22,6 +22,6 @@
       </div>
       <div class="col-xs-4 col-md-2"><%= run.user ? run.user.name : 'Guest' -%></div>
       <div class="col-xs-6 col-md-2 text-right"><%= time_ago_in_words run.create_time %> ago</div>
-      <div class="col-xs-2 col-md-1"><%= render "button", :run => run %></div>
+      <div class="col-xs-2 col-md-1"><%= render "buttons", :run => run %></div>
     </div>
 <% end %>
