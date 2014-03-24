@@ -16,11 +16,11 @@
 
 <% @runs.each do |run| %>
     <div class="row separated">
-      <div class="col-xs-12 col-md-7">
+      <div class="col-xs-12 col-md-7 ellipsis-overflow">
         <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
         <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
       </div>
-      <div class="col-xs-4 col-md-2"><%= run.user ? run.user.name : 'Guest' -%></div>
+      <div class="col-xs-4 col-md-2 ellipsis-overflow"><%= run.user ? run.user.name : 'Guest' -%></div>
       <div class="col-xs-6 col-md-2 text-right"><%= time_ago_in_words run.create_time %> ago</div>
       <div class="col-xs-2 col-md-1"><%= render "buttons", :run => run %></div>
     </div>

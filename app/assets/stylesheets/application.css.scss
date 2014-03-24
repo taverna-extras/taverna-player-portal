@@ -33,15 +33,19 @@ div.under-form-links {
   margin-bottom: 5px;
 }
 
-
 .expandable-section {
 
 }
-
 
 .separated {
   border-style: solid;
   border-color: #eeeeee;
   border-width: 0 0 1px;
   padding: 10px 0;
+}
+
+.ellipsis-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
