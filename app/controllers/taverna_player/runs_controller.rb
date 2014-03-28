@@ -20,7 +20,7 @@ class TavernaPlayer::RunsController < ApplicationController
 
   def run_params
     p = old_run_params
-    p.merge(:user_id => current_user.id) if user_signed_in?
+    p = p.merge(:user_id => current_user.id) if user_signed_in?
     p
   end
 

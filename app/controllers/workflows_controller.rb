@@ -67,12 +67,12 @@ class WorkflowsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def workflow_params
     p = params.require(:workflow).permit(:document, :title, :description)
-    p.merge(:user_id => current_user.id) if user_signed_in?
+    p = p.merge(:user_id => current_user.id) if user_signed_in?
     p
   end
 
-  # Only allow the workflow owner to modify or delete the workflow
+  # Only allow the workflow owner (or an admin) to modify or delete the workflow
   def authorize_owner
-    authorize(@workflow.user == current_user)
+    authorize(can?(action_name, @workflow))
   end
 end

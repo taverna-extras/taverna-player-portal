@@ -24,6 +24,15 @@ class WorkflowsControllerTest < ActionController::TestCase
     assert_response :unauthorized
   end
 
+  test "should get edit form if admin" do
+    workflow = create(:workflow)
+    sign_in create(:admin)
+
+    get :edit, :id => workflow.id
+
+    assert_response :success
+  end
+
   test "should create workflow" do
     user = create(:user)
     sign_in user
@@ -57,6 +66,16 @@ class WorkflowsControllerTest < ActionController::TestCase
     assert_equal old_title, assigns(:workflow).title
   end
 
+  test "should update workflow if admin" do
+    workflow = create(:workflow)
+    sign_in create(:admin)
+
+    patch :update, :id => workflow.id, :workflow => {:title => 'New title'}
+
+    assert_redirected_to workflow_url(workflow)
+    assert_equal 'New title', assigns(:workflow).title
+  end
+
   test "should delete workflow" do
     workflow = create(:workflow)
     sign_in workflow.user
@@ -73,6 +92,15 @@ class WorkflowsControllerTest < ActionController::TestCase
     delete :destroy, :id => workflow.id
 
     assert_response :unauthorized
+  end
+
+  test "should delete workflow if admin" do
+    workflow = create(:workflow)
+    sign_in create(:admin)
+
+    delete :destroy, :id => workflow.id
+
+    assert_redirected_to workflows_url
   end
 
 end

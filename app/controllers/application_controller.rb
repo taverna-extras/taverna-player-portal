@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def can?(action, object)
+    user_signed_in? && current_user.can?(action, object)
+  end
+
 end

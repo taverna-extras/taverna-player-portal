@@ -9,18 +9,17 @@ class Workflow < ActiveRecord::Base
            :dependent => :destroy
   has_many :output_ports, :class_name => 'WorkflowOutputPort',
            :dependent => :destroy
-
   has_many :runs, :class_name => 'TavernaPlayer::Run', :dependent => :destroy
 
   has_attached_file :document
-
   has_attached_file :diagram, :styles => { :thumb => ["100x100#", :jpg],
                                            :large => ["400x400>", :jpg]
   }, :default_url => "/images/:style/missing.png"
 
-    validates :title, :presence => true
-
+  validates :title, :presence => true
+  validates :user, :presence => true
   validates :document, :attachment_presence => true
+
   do_not_validate_attachment_file_type :diagram
   do_not_validate_attachment_file_type :document # Paperclip fails to validate t2flows which are uploaded as 'application/octet-stream'
 

@@ -7,4 +7,12 @@ class UsersTest < ActiveSupport::TestCase
     assert user.save
   end
 
+  test "first user is admin" do
+    first_user = create(:user)
+    second_user = create(:user)
+
+    assert first_user.admin?
+    assert !second_user.admin?
+  end
+
 end
