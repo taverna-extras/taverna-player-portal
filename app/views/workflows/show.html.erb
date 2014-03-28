@@ -16,6 +16,9 @@
       <p>
         <%= simple_format @workflow.description -%>
       </p>
+      <span class="muted">
+        Uploaded by <%= @workflow.user.name -%> <%= time_ago_in_words(@workflow.created_at) -%> ago
+      </span>
     </div>
   </div>
   <div class="row">
