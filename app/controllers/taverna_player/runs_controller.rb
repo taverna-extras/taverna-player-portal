@@ -16,6 +16,8 @@ class TavernaPlayer::RunsController < ApplicationController
 
   # Extend the RunsController here.
 
+  before_action :authorize_owner, :only => [:edit, :update, :destroy, :read_interaction, :write_interaction]
+
   alias_method :old_run_params, :run_params
 
   def run_params
@@ -28,5 +30,10 @@ class TavernaPlayer::RunsController < ApplicationController
     select = { :embedded => false }
     select[:workflow_id] = params[:workflow_id] if params[:workflow_id]
     @runs = TavernaPlayer::Run.where(select).order("created_at DESC")
+  end
+
+  # Only allow the workflow owner (or an admin) to modify or delete the run
+  def authorize_owner
+    authorize(can?(action_name, @run))
   end
 end

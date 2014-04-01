@@ -7,21 +7,34 @@
   # Commission 7th Framework Programme (FP7), through grant agreement
   # number 283359.
   #
-  # Author: Robert Haines
+  # Author: Robert Haines, Finn Bacall
 %>
 
 <div id="run-button">
-  <% if can?(:manage, run) %>
-      <% if run.complete? %>
-          <%= link_to run, method: :delete, data: { confirm: 'Are you sure you want to delete this run?' },
-                      :class => 'btn btn-xs btn-danger', :title => 'Delete' do %>
-              <span class="glyphicon glyphicon-trash"></span> <span class="hidden-xs">Delete</span>
-          <% end %>
-      <% else %>
-          <%= link_to cancel_run_path(run.id), method: :put, data: { confirm: 'Are you sure you want to cancel this run?' },
-                      :class => 'btn btn-xs btn-danger', :title => 'Cancel' do %>
-              <span class="glyphicon glyphicon-ban-circle"></span> <span class="hidden-xs">Cancel</span>
-          <% end %>
-      <% end %>
-  <% end %>
+  <% size ||= '' %>
+  <% show_all_labels ||= false %>
+
+  <div class="btn-group <%= size -%>">
+    <% if run.complete? %>
+        <%= link_to run.results.url, :class => 'btn btn-default', :title => 'Download run results' do %>
+            <span class="glyphicon glyphicon-download-alt"></span> Download
+        <% end %>
+    <% end %>
+    <% if can?(:manage, run) %>
+        <%= link_to main_app.edit_run_path(run), :class => 'btn btn-default', :title => 'Manage' do %>
+            <span class="glyphicon glyphicon-wrench"></span> <%= "Manage" if show_all_labels %>
+        <% end %>
+        <% if run.complete? %>
+            <%= link_to run, method: :delete, data: { confirm: 'Are you sure you want to delete this run?' },
+                        :class => 'btn btn-danger', :title => 'Delete' do %>
+                <span class="glyphicon glyphicon-trash"></span> <%= "Delete" if show_all_labels %>
+            <% end %>
+        <% else %>
+            <%= link_to cancel_run_path(run.id), method: :put, data: { confirm: 'Are you sure you want to cancel this run?' },
+                        :class => 'btn btn-danger', :title => 'Cancel' do %>
+                <span class="glyphicon glyphicon-ban-circle"></span> <%= "Cancel" if show_all_labels %>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
 </div>

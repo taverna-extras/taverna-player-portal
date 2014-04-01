@@ -1,0 +1,26 @@
+<h1>Editing run</h1>
+
+<%= form_for(@run) do |f| %>
+    <% if @run.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@run.errors.count, "error") %> prohibited this workflow run from being updated:</h2>
+
+          <ul>
+            <% @run.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name, 'Title' %>
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+
+    <%= f.submit :class => 'btn btn-primary' %>
+<% end %>
+
+<div class="under-form-links">
+  <%= link_to 'Back', @run, :class => 'btn btn-default btn-xs' %>
+</div>
