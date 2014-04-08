@@ -23,6 +23,10 @@
       <%= f.text_area :description, :class => 'form-control' %>
     </div>
 
+    <%= f.fields_for(:policy, @workflow.policy || Policy.new) do |p| %>
+      <%= render 'policies/policy_form', :form => p, :policy => @workflow.policy %>
+    <% end %>
+
     <%= f.submit :class => 'btn btn-primary' %>
 <% end %>
 

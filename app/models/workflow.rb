@@ -4,6 +4,8 @@ require 't2flow/dot'
 
 class Workflow < ActiveRecord::Base
 
+  include Authorization
+
   belongs_to :user
   has_many :input_ports, :class_name => 'WorkflowInputPort',
            :dependent => :destroy

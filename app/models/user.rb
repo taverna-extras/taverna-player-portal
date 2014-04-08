@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def groups
+    []
+  end
+
   private
 
   def first_user_admin
