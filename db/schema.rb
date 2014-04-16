@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140328143602) do
+ActiveRecord::Schema.define(version: 20140416133929) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20140328143602) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "permissions", force: true do |t|
+    t.integer "policy_id"
+    t.integer "subject_id"
+    t.string  "subject_type"
+    t.integer "mask"
+  end
+
+  create_table "policies", force: true do |t|
+    t.string  "title"
+    t.integer "public_mask"
+  end
 
   create_table "taverna_player_interactions", force: true do |t|
     t.boolean  "replied",                     default: false
@@ -151,6 +163,9 @@ ActiveRecord::Schema.define(version: 20140328143602) do
     t.string   "diagram_content_type"
     t.integer  "diagram_file_size"
     t.datetime "diagram_updated_at"
+    t.integer  "policy_id"
   end
+
+  add_index "workflows", ["policy_id"], name: "index_workflows_on_policy_id"
 
 end

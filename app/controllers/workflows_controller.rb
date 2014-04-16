@@ -1,7 +1,6 @@
 class WorkflowsController < ApplicationController
 
-  before_action :set_workflow, :only => [:show, :edit, :update, :destroy, :download]
-  before_action :authorize_owner, :only => [:edit, :update, :destroy]
+  before_action :set_workflow_and_auth, :only => [:show, :edit, :update, :destroy, :download]
 
   def index
     @workflows = Workflow.with_permissions(current_user, :view)
@@ -60,8 +59,9 @@ class WorkflowsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_workflow
+  def set_workflow_and_auth
     @workflow = Workflow.find(params[:id])
+    authorize(@workflow.can?(current_user, action_name))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -69,10 +69,5 @@ class WorkflowsController < ApplicationController
     p = params.require(:workflow).permit(:document, :title, :description, :policy_attributes => [:id, :public_permissions => []])
     p = p.merge(:user_id => current_user.id) if user_signed_in?
     p
-  end
-
-  # Only allow the workflow owner (or an admin) to modify or delete the workflow
-  def authorize_owner
-    authorize(@workflow.can?(current_user, action_name))
   end
 end

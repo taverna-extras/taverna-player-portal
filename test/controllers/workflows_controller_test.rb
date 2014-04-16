@@ -103,4 +103,33 @@ class WorkflowsControllerTest < ActionController::TestCase
     assert_redirected_to workflows_url
   end
 
+  test "should show public workflow" do
+    workflow = create(:workflow)
+    sign_in create(:user)
+
+    get :show, :id => workflow
+
+    assert_response :success
+  end
+
+  test "shouldn't show private workflow" do
+    workflow = create(:private_workflow)
+    sign_in create(:user)
+
+    get :show, :id => workflow
+
+    assert_response :unauthorized
+  end
+
+  test "should show private workflow if explicitly shared" do
+    workflow = create(:private_workflow, :policy => create(:private_policy_with_permission))
+    shared_with = workflow.policy.permissions.first.subject
+
+    sign_in shared_with
+
+    get :show, :id => workflow
+
+    assert_response :success
+  end
+
 end

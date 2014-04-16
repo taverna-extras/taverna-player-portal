@@ -1,5 +1,7 @@
 module Authorization
 
+  # Assumes including class has a "user" attribute
+
   PRIVILEGES = {
       :view => 1,
       :edit => 2
@@ -68,9 +70,7 @@ module Authorization
   end
 
   def default_policy
-    # Policy.new(:user => user, :user_permissions => [:view, :edit, :execute],
-    #            :group_permissions => [:view, :edit, :execute],
-    #            :public_permissions => [:view, :execute])
+    Policy.new(:title => 'Default Public Policy', :public_permissions => [:view])
   end
 
 end
