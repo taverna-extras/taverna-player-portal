@@ -1,35 +1,38 @@
 module Authorization
 
   PRIVILEGES = {
-    :none => 0,
-    :view => 1,    # read
-    :edit => 2,    # write
-    :execute => 4  # execute
-  }.freeze
+      :view => 1,
+      :edit => 2
+  }
 
-  def self.permissions(mask)
-    Authorization::PRIVILEGES.select  { |_, index| mask & index != 0 }.keys
+  ## Gets a list of privileges from a bitmask
+  def self.to_permissions(mask)
+    Authorization::PRIVILEGES.select { |_, index| mask & (2 ** (index - 1)) == index }.keys
   end
 
+  ## Turns a list of privileges (or a singleton) into a bitmask
   def self.to_mask(permissions)
     permissions = [permissions] if permissions.is_a?(Symbol)
-    permissions.inject(0) { |mask, permission| mask + (PRIVILEGES[permission.to_sym] || 0) }
+    permissions.inject(0) { |mask, permission| mask + (2 ** (Authorization::PRIVILEGES[permission] - 1) || 0) }
   end
 
   def self.included(base)
     base.class_eval do
       # Find only things that the given user has the given privilege for
-      # Also loads permissions into memory.
-      scope :with_permissions, lambda { |user, permissions|
-        mask = Authorization.to_mask(permissions)
-        joins(:policy).
-        where("(policies.user_mask   & ? != 0 AND policies.user_id = ?) OR
-               (policies.group_mask  & ? != 0 AND policies.group_id IN (?)) OR
-               (policies.public_mask & ? != 0)",
-              mask, user,
-              mask, user.try(:groups) || [],
-              mask)
+      scope :with_permissions, lambda { |user, privileges|
+        mask = Authorization.to_mask(privileges)
+        joins(:policy => :permissions).
+        where("(user_id = ?) OR
+               (permissions.mask & ? = ? AND permissions.subject_type = 'User' AND permissions.subject_id = ?) OR
+               (permissions.mask & ? = ? AND permissions.subject_type = 'Group' AND permissions.subject_id IN (?)) OR
+               (policies.public_mask & ? = ?)",
+              user,
+              mask, mask, user,
+              mask, mask, user.try(:groups) || [],
+              mask, mask)
       }
+
+      scope :visible_by, lambda { |user| with_permissions(user, :view) }
 
       belongs_to :policy, :dependent => :destroy
 
@@ -42,7 +45,7 @@ module Authorization
   # Check if the given user has the given privilege.
   # Doesn't need to do additional queries if operating on a #with_privilege scope.
   def can?(user, action)
-    self.policy.permits?(user, action)
+    self.user == user || self.policy.permits?(user, action)
   end
 
   def ensure_policy
@@ -51,7 +54,7 @@ module Authorization
 
   private
 
-  def Authorization.privilege_for_action(action)
+  def self.privilege_for_action(action)
     case action.to_sym
       when :new, :create
         :none
@@ -65,9 +68,9 @@ module Authorization
   end
 
   def default_policy
-    Policy.new(:user => user, :user_permissions => [:view, :edit, :execute],
-               :group_permissions => [:view, :edit, :execute],
-               :public_permissions => [:view, :execute])
+    # Policy.new(:user => user, :user_permissions => [:view, :edit, :execute],
+    #            :group_permissions => [:view, :edit, :execute],
+    #            :public_permissions => [:view, :execute])
   end
 
 end
