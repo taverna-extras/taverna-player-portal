@@ -23,15 +23,16 @@ module Authorization
       # Find only things that the given user has the given privilege for
       scope :with_permissions, lambda { |user, privileges|
         mask = Authorization.to_mask(privileges)
-        joins(:policy => :permissions).
-        where("(user_id = ?) OR
+        joins('LEFT OUTER JOIN "policies" ON "policies"."id" = "workflows"."policy_id"
+               LEFT OUTER JOIN "permissions" ON "permissions"."policy_id" = "policies"."id"').
+        where("(workflows.user_id = ?) OR
                (permissions.mask & ? = ? AND permissions.subject_type = 'User' AND permissions.subject_id = ?) OR
                (permissions.mask & ? = ? AND permissions.subject_type = 'Group' AND permissions.subject_id IN (?)) OR
                (policies.public_mask & ? = ?)",
               user,
               mask, mask, user,
               mask, mask, user.try(:groups) || [],
-              mask, mask)
+              mask, mask).references(:policy, :permissions)
       }
 
       scope :visible_by, lambda { |user| with_permissions(user, :view) }
