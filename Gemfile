@@ -61,4 +61,7 @@ gem 'taverna-player', :git=>"git://github.com/myGrid/taverna-player.git", :branc
 
 group :test do
   gem "factory_girl_rails", "~> 4.0"
+  gem 'rails-perftest'
+  gem 'ruby-prof'
+  gem "temping"
 end

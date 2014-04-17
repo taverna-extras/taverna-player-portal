@@ -3,7 +3,7 @@ class WorkflowsController < ApplicationController
   before_action :set_workflow_and_auth, :only => [:show, :edit, :update, :destroy, :download]
 
   def index
-    @workflows = Workflow.with_permissions(current_user, :view)
+    @workflows = Workflow.with_permissions(current_user, :view).limit(10)
   end
 
   def show
