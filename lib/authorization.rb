@@ -15,7 +15,7 @@ module Authorization
   ## Turns a list of privileges (or a singleton) into a bitmask
   def self.to_mask(permissions)
     permissions = [permissions] if permissions.is_a?(Symbol)
-    permissions.inject(0) { |mask, permission| mask + (2 ** (Authorization::PRIVILEGES[permission] - 1) || 0) }
+    permissions.inject(0) { |mask, permission| mask + (2 ** ((Authorization::PRIVILEGES[permission] || 0) - 1) || 0) }
   end
 
   def self.included(base)
