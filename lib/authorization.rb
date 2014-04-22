@@ -48,7 +48,9 @@ module Authorization
   # Check if the given user has the given privilege.
   # Doesn't need to do additional queries if operating on a #with_privilege scope.
   def can?(user, action)
-    self.user == user || self.policy.permits?(user, action)
+    self.user.admin? ||
+    self.user == user ||
+    self.policy.permits?(user, action)
   end
 
   def ensure_policy
