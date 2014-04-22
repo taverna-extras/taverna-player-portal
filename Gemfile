@@ -59,6 +59,9 @@ gem 'taverna-t2flow'
 # Executing workflows
 gem 'taverna-player', :git=>"git://github.com/myGrid/taverna-player.git", :branch => 'rails4'
 
+# Pagination
+gem 'kaminari'
+
 group :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'rails-perftest'
