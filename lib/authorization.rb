@@ -53,10 +53,6 @@ module Authorization
     self.policy.permits?(user, action)
   end
 
-  def ensure_policy
-    self.policy ||= default_policy
-  end
-
   private
 
   def self.privilege_for_action(action)
@@ -70,6 +66,10 @@ module Authorization
       else
         :none
     end
+  end
+
+  def ensure_policy
+    self.policy ||= default_policy
   end
 
   def default_policy
