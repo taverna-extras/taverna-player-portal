@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416133929) do
+ActiveRecord::Schema.define(version: 20140423091126) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
@@ -97,9 +97,11 @@ ActiveRecord::Schema.define(version: 20140416133929) do
     t.text     "failure_message"
     t.integer  "parent_id"
     t.integer  "user_id"
+    t.integer  "policy_id"
   end
 
   add_index "taverna_player_runs", ["parent_id"], name: "index_taverna_player_runs_on_parent_id"
+  add_index "taverna_player_runs", ["policy_id"], name: "index_taverna_player_runs_on_policy_id"
   add_index "taverna_player_runs", ["user_id"], name: "index_taverna_player_runs_on_user_id"
   add_index "taverna_player_runs", ["workflow_id"], name: "index_taverna_player_runs_on_workflow_id"
 

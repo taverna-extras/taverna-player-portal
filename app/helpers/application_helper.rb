@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def can?(action, object)
-    user_signed_in? && current_user.can?(action, object)
+    object.can?(current_user, action)
   end
 
 end

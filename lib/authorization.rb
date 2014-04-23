@@ -48,7 +48,7 @@ module Authorization
   # Check if the given user has the given privilege.
   # Doesn't need to do additional queries if operating on a #with_privilege scope.
   def can?(user, action)
-    self.user.admin? ||
+    (user && user.admin?) ||
     self.user == user ||
     self.policy.permits?(user, action)
   end
@@ -64,7 +64,7 @@ module Authorization
       when :edit, :update, :manage, :destroy
         :edit
       else
-        :none
+        raise 'Unrecognized action'
     end
   end
 

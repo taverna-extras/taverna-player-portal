@@ -16,6 +16,9 @@ module TavernaPlayer
     include TavernaPlayer::Concerns::Models::Run
 
     # Extend the Run model here.
+
+    include Authorization
+
     belongs_to :user
 
   end
