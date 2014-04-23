@@ -8,8 +8,6 @@
   <% end %>
 </div>
 
-<%= paginate @workflows %>
-
 <% @workflows.each do |workflow| %>
     <div class="media separated">
       <%= link_to workflow, :class => 'pull-left' do %>
@@ -37,4 +35,6 @@
     </div>
 <% end %>
 
-<br>
+<div class="text-center">
+  <%= paginate @workflows %>
+</div>

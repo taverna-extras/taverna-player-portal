@@ -25,3 +25,7 @@
       <div class="col-xs-12 col-md-3"><%= render "buttons", :run => run, :size => 'btn-group-xs', :show_all_labels => false %></div>
     </div>
 <% end %>
+
+<div class="text-center">
+  <%= paginate @runs %>
+</div>
