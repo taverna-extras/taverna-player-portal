@@ -61,6 +61,7 @@ gem 'taverna-player', :git=>"git://github.com/myGrid/taverna-player.git", :branc
 
 # Pagination
 gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 
 group :test do
   gem "factory_girl_rails", "~> 4.0"
