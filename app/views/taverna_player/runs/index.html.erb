@@ -18,7 +18,13 @@
     <div class="row separated">
       <div class="col-xs-12 col-md-5 ellipsis-overflow">
         <%= run_state_icon(run) -%> <%= link_to run.name, run %><br/>
-        <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
+        <% if can?(:view, run.workflow) %>
+            <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
+        <% else %>
+            <span class="muted">
+              <%= run.workflow.title %>
+            </span>
+        <% end %>
       </div>
       <div class="col-xs-6 col-md-2 ellipsis-overflow" title="<%= run.user ? run.user.name : 'Guest' -%>"><%= run.user ? run.user.name : 'Guest' -%></div>
       <div class="col-xs-6 col-md-2 ellipsis-overflow text-right" title="<%= time_ago_in_words run.created_at %> ago"><%= time_ago_in_words run.created_at %> ago</div>
