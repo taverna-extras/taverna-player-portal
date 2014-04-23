@@ -21,7 +21,7 @@
         <%= link_to run.workflow.title, main_app.workflow_path(run.workflow), :class => 'muted' %>
       </div>
       <div class="col-xs-6 col-md-2 ellipsis-overflow" title="<%= run.user ? run.user.name : 'Guest' -%>"><%= run.user ? run.user.name : 'Guest' -%></div>
-      <div class="col-xs-6 col-md-2 ellipsis-overflow text-right" title="<%= time_ago_in_words run.create_time %> ago"><%= time_ago_in_words run.create_time %> ago</div>
+      <div class="col-xs-6 col-md-2 ellipsis-overflow text-right" title="<%= time_ago_in_words run.created_at %> ago"><%= time_ago_in_words run.created_at %> ago</div>
       <div class="col-xs-12 col-md-3"><%= render "buttons", :run => run, :size => 'btn-group-xs', :show_all_labels => false %></div>
     </div>
 <% end %>
