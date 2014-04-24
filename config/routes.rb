@@ -21,6 +21,8 @@ WorkflowPortal::Application.routes.draw do
 
   resources :runs, :controller => 'taverna_player/runs', :only => ['edit', 'update']
 
+  resources :folders
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

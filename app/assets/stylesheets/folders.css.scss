@@ -1,0 +1,28 @@
+// Place all the styles related to the folders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.folder {
+  min-height: 3em;
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin: 1em;
+}
+
+div.folder.highlight {
+}
+
+div.folder-entry {
+  padding: 1em;
+  margin: 1em 0 0 1em;
+  border: 1px solid #ccc;
+}
+
+div.folder-entry.moving {
+  background-color: #ffffcc;
+  border-style: dotted;
+}
+
+div.folder-entry.ghost {
+  opacity: 0.4;
+}
