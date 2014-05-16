@@ -21,5 +21,14 @@ module TavernaPlayer
 
     belongs_to :user
 
+    alias_method :original_default_policy, :default_policy
+    def default_policy
+      if user.nil?
+        Policy.new(:title => 'Default Guest Private Policy', :public_permissions => [])
+      else
+        original_default_policy
+      end
+    end
+
   end
 end

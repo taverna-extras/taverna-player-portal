@@ -20,10 +20,21 @@
   color: $brand-danger;
 }
 
-.table td.vert-middle {
-  vertical-align: middle;
-}
-
 iframe {
   border: none;
+}
+
+.key {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  float: right;
+  padding: 10px;
+
+  h5 {
+    margin-top: 0;
+  }
+}
+
+.double-height-line {
+  line-height: 40px;
 }
