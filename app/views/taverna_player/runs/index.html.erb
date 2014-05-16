@@ -26,12 +26,21 @@
             </span>
         <% end %>
       </div>
-      <div class="col-xs-6 col-md-2 ellipsis-overflow" title="<%= run.user ? run.user.name : 'Guest' -%>"><%= run.user ? run.user.name : 'Guest' -%></div>
-      <div class="col-xs-6 col-md-2 ellipsis-overflow text-right" title="<%= time_ago_in_words run.created_at %> ago"><%= time_ago_in_words run.created_at %> ago</div>
-      <div class="col-xs-12 col-md-3"><%= render "buttons", :run => run, :size => 'btn-group-xs', :show_all_labels => false %></div>
+      <div class="col-xs-6 col-md-2 ellipsis-overflow double-height-line" title="<%= run.user ? run.user.name : 'Guest' -%>"><%= run.user ? run.user.name : 'Guest' -%></div>
+      <div class="col-xs-6 col-md-2 ellipsis-overflow text-right double-height-line" title="<%= time_ago_in_words run.created_at %> ago"><%= time_ago_in_words run.created_at %> ago</div>
+      <div class="col-xs-12 col-md-3 double-height-line"><%= render "buttons", :run => run, :size => 'btn-group-sm', :show_all_labels => false %></div>
     </div>
 <% end %>
 
 <div class="text-center">
   <%= paginate @runs %>
+</div>
+
+<div class="key">
+  <h5>Key</h5>
+    <span class="glyphicon glyphicon-time state-pending"></span> Pending<br/>
+    <%= image_tag('spinner.gif') -%> Running<br/>
+    <span class="glyphicon glyphicon-ok-circle state-finished"></span> Finished<br/>
+    <span class="glyphicon glyphicon-remove-circle state-failed"></span> Failed<br/>
+    <span class="glyphicon glyphicon-ban-circle state-cancelled"></span> Cancelled<br/>
 </div>
