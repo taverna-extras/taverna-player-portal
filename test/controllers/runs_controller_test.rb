@@ -84,9 +84,10 @@ class RunsControllerTest < ActionController::TestCase
     run = create(:run)
     sign_in run.user
 
+    request.env["HTTP_REFERER"] = run_url(run)
     delete :destroy, :id => run.id, :use_route => :taverna_player
 
-    assert_redirected_to runs_url
+    assert_redirected_to run_url(run)
   end
 
   test "shouldn't delete run if unauthorized" do
@@ -102,9 +103,10 @@ class RunsControllerTest < ActionController::TestCase
     run = create(:run)
     sign_in create(:admin)
 
+    request.env["HTTP_REFERER"] = run_url(run)
     delete :destroy, :id => run.id, :use_route => :taverna_player
 
-    assert_redirected_to runs_url
+    assert_redirected_to run_url(run)
   end
 
 end
