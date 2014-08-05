@@ -1,33 +1,35 @@
 <%
-  # Copyright (c) 2013 The University of Manchester, UK.
-  #
-  # BSD Licenced. See LICENCE.rdoc for details.
-  #
-  # Taverna Player was developed in the BioVeL project, funded by the European
-  # Commission 7th Framework Programme (FP7), through grant agreement
-  # number 283359.
-  #
-  # Author: Robert Haines
+   # Copyright (c) 2013 The University of Manchester, UK.
+   #
+   # BSD Licenced. See LICENCE.rdoc for details.
+   #
+   # Taverna Player was developed in the BioVeL project, funded by the European
+   # Commission 7th Framework Programme (FP7), through grant agreement
+   # number 283359.
+   #
+   # Author: Robert Haines
 %>
 
 <div id="run-outputs">
   <% if run.outputs.size > 0 %>
-      <h2 class="expandable-section-heading" data-toggle="collapse" data-target="#outputs">
-        Outputs <span class="caret"></span>
-      </h2>
+      <div class="run-data">
+        <h3 class="expandable-section-heading" data-toggle="collapse" data-target="#outputs">
+          Results
+          <span class="muted">(<%= run.outputs.count -%>)</span>
+          <span class="caret"></span>
+        </h3>
 
-
-      <div id="outputs" class="collapse in">
-        <% run.outputs.each do |output| %>
-            <%= render 'port', :port => output %>
-        <% end%>
-      </div>
+        <div id="outputs" class="collapse in">
+          <% run.outputs.each do |output| %>
+              <%= render 'port', :port => output %>
+          <% end%>
+        </div>
   <% end %>
+  </div>
 
   <% unless run.log.blank? %>
-      <p>
-        <b>Log:</b>
+      <div class="pull-right">
         <%= link_to "Taverna Server log", run.log.url %>
-      </p>
+      </div>
   <% end %>
 </div>

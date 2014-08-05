@@ -1,21 +1,27 @@
 <%
-  # Copyright (c) 2013 The University of Manchester, UK.
-  #
-  # BSD Licenced. See LICENCE.rdoc for details.
-  #
-  # Taverna Player was developed in the BioVeL project, funded by the European
-  # Commission 7th Framework Programme (FP7), through grant agreement
-  # number 283359.
-  #
-  # Author: Robert Haines
+   # Copyright (c) 2013 The University of Manchester, UK.
+   #
+   # BSD Licenced. See LICENCE.rdoc for details.
+   #
+   # Taverna Player was developed in the BioVeL project, funded by the European
+   # Commission 7th Framework Programme (FP7), through grant agreement
+   # number 283359.
+   #
+   # Author: Robert Haines
 %>
 
 <div id="run-inputs">
-  <h2 class="expandable-section-heading" data-toggle="collapse" data-target="#inputs">Inputs <span class="caret"></span></h2>
+  <div class="run-data">
+    <h3 class="expandable-section-heading" data-toggle="collapse" data-target="#inputs">
+      Input Data
+      <span class="muted">(<%= run.inputs.count -%>)</span>
+      <span class="caret"></span>
+    </h3>
 
-  <div id="inputs"  class="collapse">
-    <% run.inputs.each do |input| %>
-        <%= render 'port', :port => input %>
-    <% end%>
+    <div id="inputs"  class="collapse">
+      <% run.inputs.each do |input| %>
+          <%= render 'port', :port => input %>
+      <% end%>
+    </div>
   </div>
 </div>

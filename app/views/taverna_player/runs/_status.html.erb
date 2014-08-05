@@ -9,7 +9,7 @@
     <%= time_ago_in_words(run.created_at, include_seconds: true) %> ago
   </p>
 
-  <% if run.complete? %>
+  <% if run.finished? %>
       <p>
         <b>Duration:</b>
         <%= distance_of_time_in_words(run.start_time, run.finish_time, include_seconds: true) %>
