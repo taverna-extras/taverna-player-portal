@@ -1,15 +1,14 @@
-# Taverna Player Server configuration
+# Taverna Player's Taverna Server configuration
 
 TavernaPlayer.setup do |config|
-
   # Taverna Server configuration information. The poll interval is in seconds
   # and sets how often the server will be polled for updates by each worker.
   # The retry interval is also in seconds and sets how long a worker will wait
   # before trying to start a run if the server is initially busy.
-  config.server_address = "https://eric.rcs.manchester.ac.uk:8443/tavserv-test"
+  config.server_address = "http://leela.cs.man.ac.uk:8080/taverna-254" #"https://eric.rcs.manchester.ac.uk:8443/tavserv-test"
   config.server_username = "taverna"
   config.server_password = "taverna"
-  config.server_poll_interval = 5
+  config.server_poll_interval = 2
   config.server_retry_interval = 10
 
   # Taverna Server connection configuration.
@@ -19,6 +18,6 @@ TavernaPlayer.setup do |config|
   #config.server_connection[:client_certificate] = "client-cert.crt"
   #config.server_connection[:client_password] = "P@5$w0Rd!"
   #config.server_connection[:ssl_version] = :TLSv1
-  #config.server_connection[:open_timeout] = 10
-  #config.server_connection[:read_timeout] = 10
+  config.server_connection[:open_timeout] = 30
+  config.server_connection[:read_timeout] = 30
 end
