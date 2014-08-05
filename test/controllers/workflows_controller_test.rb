@@ -132,4 +132,16 @@ class WorkflowsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "shouldn't list private workflows in index" do
+    private = FactoryGirl.create_list(:private_workflow, 5)
+    FactoryGirl.create_list(:workflow, 5)
+    sign_in create(:user)
+
+    get :index
+
+    assert_response :success
+    assert_equal 5, assigns(:workflows).count
+    assert_empty private & assigns(:workflows), "Workflow set shouldn't contain any private workflows"
+  end
+
 end
