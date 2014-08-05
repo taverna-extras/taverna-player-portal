@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-12">
       <p>
-        <%= simple_format @workflow.description -%>
+        <%= simple_format auto_link(@workflow.description) -%>
       </p>
       <span class="muted">
         Uploaded by <%= @workflow.user.name -%> <%= time_ago_in_words(@workflow.created_at) -%> ago
