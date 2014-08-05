@@ -27,7 +27,7 @@ class WorkflowsController < ApplicationController
 
     respond_to do |format|
       if @workflow.save
-        format.html { redirect_to @workflow, notice: 'Workflow was successfully created.' }
+        format.html { redirect_to @workflow, notice: 'Workflow was successfully uploaded.' }
         format.json { render action: 'show', status: :created, location: @workflow }
       else
         format.html { render action: 'new' }
