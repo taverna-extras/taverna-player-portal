@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   before_save :first_user_admin
 
   def can?(action, object)
-    object.user_id == self.id || self.admin?
+    object.can?(self, action)
   end
 
   def admin?
