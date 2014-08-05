@@ -48,7 +48,7 @@
 
           <%= f.fields_for :inputs, TavernaPlayer::RunPort::Input.new do |input_fields| %>
               <%= input_fields.hidden_field :name, :value => input[:name] %>
-              <%= input_fields.text_area :value, :value => input[:example], :rows => 3, :class => 'form-control' %>
+              <%= input_fields.text_area :value, :value => input[:example_value], :rows => 3, :class => 'form-control' %>
               <%= input_fields.file_field :file %>
           <% end %>
         </div>
