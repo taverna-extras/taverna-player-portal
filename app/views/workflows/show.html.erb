@@ -23,29 +23,34 @@
   </div>
   <div class="row">
     <div class="col-md-12">
+
       <h3>Inputs</h3>
-      <ul>
+      <dl class="dl-horizontal">
         <% @workflow.input_ports.each do |input_port| %>
-            <li>
-              <strong><%= input_port.name %></strong>
-              <% if input_port.description %>
-                  <p><%= simple_format input_port.description %></p>
-              <% end %>
-            </li>
+        <dt title="<%= input_port.name %>"><%= input_port.name %></dt>
+        <dd>
+          <% if input_port.description %>
+              <%= simple_format input_port.description %>
+          <% else %>
+            <span class="muted">No description</span>
+          <% end %>
+        </dd>
         <% end %>
-      </ul>
+      </dl>
 
       <h3>Outputs</h3>
-      <ul>
+      <dl class="dl-horizontal">
         <% @workflow.output_ports.each do |output_port| %>
-            <li>
-              <strong><%= output_port.name %></strong>
-              <% if output_port.description %>
-                  <p><%= simple_format output_port.description %></p>
-              <% end %>
-            </li>
+        <dt title="<%= output_port.name %>"><%= output_port.name %></dt>
+        <dd>
+          <% if output_port.description %>
+              <%= simple_format output_port.description %>
+          <% else %>
+            <span class="muted">No description</span>
+          <% end %>
+        </dd>
         <% end %>
-      </ul>
+      </dl>
     </div>
   </div>
 </div>
