@@ -16,9 +16,9 @@
       <p>
         <%= simple_format auto_link(@workflow.description) -%>
       </p>
-      <span class="muted">
+      <p class="text-info">
         Uploaded by <%= @workflow.user.name -%> <%= time_ago_in_words(@workflow.created_at) -%> ago
-      </span>
+      </p>
     </div>
   </div>
   <div class="row">
