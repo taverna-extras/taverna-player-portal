@@ -32,6 +32,12 @@
     </div>
 <% end %>
 
+<% if @runs.empty? %>
+    <span class="text-muted">
+      No runs found.
+    </span>
+<% end %>
+
 <div class="text-center">
   <%= paginate @runs %>
 </div>

@@ -35,6 +35,12 @@
     </div>
 <% end %>
 
+<% if @workflows.empty? %>
+    <span class="text-muted">
+      No workflows found.
+    </span>
+<% end %>
+
 <div class="text-center">
   <%= paginate @workflows %>
 </div>
