@@ -16,7 +16,7 @@
 
   <div class="btn-group <%= size -%>">
     <% if run.finished? %>
-        <%= link_to run.results.url, :class => 'btn btn-default', :title => 'Download run results' do %>
+        <%= link_to run.results.url, :target => :blank, :class => 'btn btn-default', :title => 'Download run results' do %>
             <span class="glyphicon glyphicon-download-alt"></span> Download
         <% end %>
     <% end %>
