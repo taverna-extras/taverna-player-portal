@@ -25,14 +25,13 @@ module Authorization
         mask = Authorization.to_mask(privileges)
         joins('LEFT OUTER JOIN "policies" ON "policies"."id" = "' + self.table_name + '"."policy_id"
                LEFT OUTER JOIN "permissions" ON "permissions"."policy_id" = "policies"."id"').
-        where("(#{self.table_name}.user_id = ?) OR
-               (permissions.mask & ? = ? AND permissions.subject_type = 'User' AND permissions.subject_id = ?) OR
-               (permissions.mask & ? = ? AND permissions.subject_type = 'Group' AND permissions.subject_id IN (?)) OR
-               (policies.public_mask & ? = ?)",
-              user,
-              mask, mask, user,
-              mask, mask, user.try(:groups) || [],
-              mask, mask).references(:policy, :permissions)
+        where("(#{self.table_name}.user_id = :user) OR
+               (permissions.mask & :mask = :mask AND permissions.subject_type = 'User' AND permissions.subject_id = :user) OR
+               (permissions.mask & :mask = :mask AND permissions.subject_type = 'Group' AND permissions.subject_id IN (:groups)) OR
+               (policies.public_mask & :mask = :mask)",
+              :mask => mask,
+              :user => user,
+              :groups => user.try(:groups) || []).references(:policy, :permissions)
       }
 
       scope :visible_by, lambda { |user| with_permissions(user, :view) }
