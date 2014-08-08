@@ -33,6 +33,7 @@ class TavernaPlayer::RunsController < ApplicationController
     )
 
     p = p.merge(:user_id => current_user.id) if user_signed_in?
+    p
   end
 
   def find_runs

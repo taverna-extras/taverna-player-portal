@@ -48,6 +48,15 @@ class RunsControllerTest < ActionController::TestCase
     assert_empty assigns(:run).errors
   end
 
+  test "should create run as anonymous user" do
+    post :create, :run => {:name => 'Test', :workflow_id => create(:workflow).id,
+                           :inputs_attributes => [{:name => 'simple_input', :value => 'hello'}]},
+         :use_route => :taverna_player
+
+    assert_redirected_to assigns(:run)
+    assert_empty assigns(:run).errors
+  end
+
   test "should update run" do
     run = create(:run)
     sign_in run.user
