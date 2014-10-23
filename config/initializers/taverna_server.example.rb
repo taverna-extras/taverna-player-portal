@@ -5,7 +5,7 @@ TavernaPlayer.setup do |config|
   # and sets how often the server will be polled for updates by each worker.
   # The retry interval is also in seconds and sets how long a worker will wait
   # before trying to start a run if the server is initially busy.
-  config.server_address = "http://leela.cs.man.ac.uk:8080/taverna-254" #"https://eric.rcs.manchester.ac.uk:8443/tavserv-test"
+  config.server_address = "http://localhost:8080/taverna"
   config.server_username = "taverna"
   config.server_password = "taverna"
   config.server_poll_interval = 2
