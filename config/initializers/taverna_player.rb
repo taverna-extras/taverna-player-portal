@@ -32,11 +32,11 @@ TavernaPlayer.setup do |config|
   # This should be set to the name of the user model class in the main
   # application if you have one. This defaults to nil and should be left as
   # such if your main application does not have users.
-  #config.user_model_proxy = "User"
+  config.user_model_proxy = "User"
 
   # This should be set to the name of the method used to get the current user
   # in the main app. For Devise this would be :current_user. Defaults to nil.
-  #config.current_user_callback = nil
+  config.current_user_callback = :current_user
 
   # Where to store files created by workflow runs. Should be fully qualified
   # or use :rails_root for the root directory of your application.

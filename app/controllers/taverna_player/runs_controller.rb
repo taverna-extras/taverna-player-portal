@@ -25,15 +25,13 @@ class TavernaPlayer::RunsController < ApplicationController
   end
 
   def run_params
-    p = params.require(:run).permit(:create_time, :delayed_job, :embedded, :finish_time,
-                                    :inputs_attributes, :log, :name, :parent_id, :results, :run_id,
-                                    :start_time, :status_message_key, :user_id, :workflow_id,
-                                    :inputs_attributes => [:depth, :file, :metadata, :name, :value],
-                                    :policy_attributes => [:id, :public_permissions => []]
+    params.require(:run).permit(
+      :create_time, :delayed_job, :embedded, :finish_time, :inputs_attributes,
+      :log, :name, :parent_id, :results, :run_id, :start_time,
+      :status_message_key, :user_id, :workflow_id,
+      :inputs_attributes => [:depth, :file, :metadata, :name, :value],
+      :policy_attributes => [:id, :public_permissions => []]
     )
-
-    p = p.merge(:user_id => current_user.id) if user_signed_in?
-    p
   end
 
   def find_runs
