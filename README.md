@@ -1,5 +1,4 @@
-Workflow Portal
-=========
+# Taverna Player Portal
 
 * Rails 4
 * Devise
