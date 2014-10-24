@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-WorkflowPortal::Application.load_tasks
+TavernaPlayerPortal::Application.load_tasks

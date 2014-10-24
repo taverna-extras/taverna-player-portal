@@ -1,3 +1,3 @@
 # Be sure to restart your server when you modify this file.
 
-WorkflowPortal::Application.config.session_store :cookie_store, key: '_workflowportal_session'
+TavernaPlayerPortal::Application.config.session_store :cookie_store, key: '_tavernaplayerportal_session'

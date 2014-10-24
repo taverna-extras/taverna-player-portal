@@ -1,4 +1,4 @@
-WorkflowPortal::Application.routes.draw do
+TavernaPlayerPortal::Application.routes.draw do
 
   mount TavernaPlayer::Engine, :at => "/"
 
