@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.1.0
+  - 2.1.2
+  - ruby-head
+script:
+  - RAILS_ENV=test bundle exec rake db:schema:load
+  - bundle exec rake test
+matrix:
+  allow_failures:
+    - rvm: ruby-head
