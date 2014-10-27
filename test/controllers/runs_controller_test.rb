@@ -4,6 +4,13 @@ class RunsControllerTest < ActionController::TestCase
 
   tests TavernaPlayer::RunsController
 
+  test "should get all runs" do
+    get :index, :use_route => :taverna_player
+
+    assert_not_nil assigns(:runs)
+    assert_response :success
+  end
+
   test "should get create form" do
     get :new, :workflow_id => create(:workflow).id, :use_route => :taverna_player
 
