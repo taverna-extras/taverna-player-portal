@@ -68,4 +68,5 @@ group :test do
   gem 'rails-perftest'
   gem 'ruby-prof'
   gem "temping"
+  gem 'coveralls', require: false
 end
