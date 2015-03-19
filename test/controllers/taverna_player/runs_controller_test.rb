@@ -2,21 +2,25 @@ require 'test_helper'
 
 module TavernaPlayer
   class RunsControllerTest < ActionController::TestCase
+    setup do
+      @routes = TavernaPlayer::Engine.routes
+    end
 
     test "should get all runs" do
-      get :index, :use_route => :taverna_player
+      get :index
 
       assert_not_nil assigns(:runs)
       assert_response :success
     end
 
     test "should get create form" do
-      get :new, :workflow_id => create(:workflow).id, :use_route => :taverna_player
+      get :new, :workflow_id => create(:workflow).id
 
       assert_response :success
     end
 
     test "should get edit form" do
+      @routes = TavernaPlayerPortal::Application.routes
       run = create(:run)
       sign_in run.user
 
@@ -26,6 +30,7 @@ module TavernaPlayer
     end
 
     test "shouldn't get edit form if unauthorized" do
+      @routes = TavernaPlayerPortal::Application.routes
       run = create(:run)
 
       get :edit, :id => run.id
@@ -34,6 +39,7 @@ module TavernaPlayer
     end
 
     test "should get edit form if admin" do
+      @routes = TavernaPlayerPortal::Application.routes
       run = create(:run)
       sign_in create(:admin)
 
@@ -49,7 +55,7 @@ module TavernaPlayer
       post :create, :run => {
         :name => 'Test', :workflow_id => create(:workflow).id,
         :inputs_attributes => [{:name => 'simple_input', :value => 'hello'}]
-      }, :use_route => :taverna_player
+      }
 
       assert_redirected_to assigns(:run)
       assert_empty assigns(:run).errors
@@ -59,7 +65,7 @@ module TavernaPlayer
       post :create, :run => {
         :name => 'Test', :workflow_id => create(:workflow).id,
         :inputs_attributes => [{:name => 'simple_input', :value => 'hello'}]
-      }, :use_route => :taverna_player
+      }
 
       assert_redirected_to assigns(:run)
       assert_empty assigns(:run).errors
@@ -102,7 +108,7 @@ module TavernaPlayer
       sign_in run.user
 
       request.env["HTTP_REFERER"] = run_url(run)
-      delete :destroy, :id => run.id, :use_route => :taverna_player
+      delete :destroy, :id => run.id
 
       assert_redirected_to run_url(run)
     end
@@ -111,7 +117,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in create(:user)
 
-      delete :destroy, :id => run.id, :use_route => :taverna_player
+      delete :destroy, :id => run.id
 
       assert_response :unauthorized
     end
@@ -121,7 +127,7 @@ module TavernaPlayer
       sign_in create(:admin)
 
       request.env["HTTP_REFERER"] = run_url(run)
-      delete :destroy, :id => run.id, :use_route => :taverna_player
+      delete :destroy, :id => run.id
 
       assert_redirected_to run_url(run)
     end
