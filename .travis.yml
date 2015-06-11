@@ -2,6 +2,7 @@ language: ruby
 rvm:
   - 2.1.0
   - 2.1.2
+  - 2.2.2
   - ruby-head
 before_script:
   - /bin/cp $TRAVIS_BUILD_DIR/config/initializers/secret_token.rb.example $TRAVIS_BUILD_DIR/config/initializers/secret_token.rb
