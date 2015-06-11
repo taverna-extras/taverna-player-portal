@@ -20,3 +20,4 @@ config/initializers/secret_token.rb
 config/initializers/taverna_server.rb
 config/initializers/portal_configuration.rb
 /.idea/*
+/public/assets
