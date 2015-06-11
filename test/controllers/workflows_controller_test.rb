@@ -2,9 +2,16 @@ require 'test_helper'
 
 class WorkflowsControllerTest < ActionController::TestCase
   test "should get create form" do
+    sign_in create(:user)
     get :new
 
     assert_response :success
+  end
+
+  test "shouldn't get create form for anonymous users" do
+    get :new
+
+    assert_response :unauthorized
   end
 
   test "should get edit form" do
