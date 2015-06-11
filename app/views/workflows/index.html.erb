@@ -2,11 +2,13 @@
   <h1>Workflows</h1>
 </div>
 
-<div class="clearfix">
-  <%= link_to new_workflow_path, :class => 'btn btn-success pull-right' do %>
-      <span class="glyphicon glyphicon-plus"></span> New Workflow
-  <% end %>
-</div>
+<% if user_signed_in? %>
+    <div class="clearfix">
+      <%= link_to new_workflow_path, :class => 'btn btn-success pull-right' do %>
+          <span class="glyphicon glyphicon-plus"></span> New Workflow
+      <% end %>
+    </div>
+<% end %>
 
 <% @workflows.each do |workflow| %>
     <div class="media separated">

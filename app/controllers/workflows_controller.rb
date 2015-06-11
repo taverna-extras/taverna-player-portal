@@ -1,6 +1,7 @@
 class WorkflowsController < ApplicationController
 
   before_action :set_workflow_and_auth, :only => [:show, :edit, :update, :destroy, :download]
+  before_action :check_logged_in?, :only => [:new, :create]
 
   def index
     @workflows = Workflow.with_permissions(current_user, :view).page(params[:page])
@@ -58,7 +59,6 @@ class WorkflowsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_workflow_and_auth
     @workflow = Workflow.find(params[:id])
     authorize(@workflow.can?(current_user, action_name))
