@@ -37,5 +37,7 @@ EXPOSE 3000
 
 ENTRYPOINT ["/taverna-player-portal/docker/entrypoint.sh"]
 
-CMD ["rails", "server"]
+VOLUME ["/taverna-player-portal/db"]
+VOLUME ["/taverna-player-portal/public/system"]
 
+CMD ["rails", "server"]
