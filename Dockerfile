@@ -1,43 +1,44 @@
+# Base
 FROM ruby:2.1.2
 
+# Packages
 RUN apt-get update -qq && apt-get install -y build-essential
-
 # Database uses SQLite3
 RUN apt-get -y install sqlite libsqlite3-dev
-
 # To parse t2flows:
 RUN apt-get install -y libxml2-dev libxslt1-dev
-
 # To generate t2flow images
 RUN apt-get install -y libtool libmagickwand-dev graphviz ImageMagick
-
 RUN apt-get install -y nodejs
 
+# Environment
 ADD . /taverna-player-portal
-
 WORKDIR /taverna-player-portal
-
 ENV RAILS_ENV production
 
+# Gems
 RUN bundle install
 
+# DB
 RUN bundle exec rake db:setup
+# Migrate, incase we are using a pre-existing, but outdated database
+RUN bundle exec rake db:migrate
 
-# Generate secret
+# Config
 RUN cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
-RUN sed -i 's/key = ""/key = "'"`bundle exec rake secret`"'"/' config/initializers/secret_token.rb
-
 RUN cp config/initializers/portal_configuration.rb.example config/initializers/portal_configuration.rb
-
 RUN cp config/initializers/taverna_server.rb.example config/initializers/taverna_server.rb
 
+# Assets (CSS/JS)
 RUN bundle exec rake assets:precompile
 
+# Network
 EXPOSE 3000
 
+# Runtime
 ENTRYPOINT ["/taverna-player-portal/docker/entrypoint.sh"]
 
-VOLUME ["/taverna-player-portal/db"]
-VOLUME ["/taverna-player-portal/public/system"]
+# Shared
+VOLUME ["/taverna-player-portal/db/sqlite", "/taverna-player-portal/public/system", "/taverna-player-portal/config", "/taverna-player-portal/log"]
 
 CMD ["rails", "server"]
