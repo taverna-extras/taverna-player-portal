@@ -1,0 +1,21 @@
+<h1>Settings</h1>
+
+<%= form_tag(admin_update_settings_path, :method => :put) do %>
+    <div class="form-group">
+      <%= label_tag 'settings[portal_name]', 'Portal name' %>
+      <%= text_field_tag 'settings[portal_name]', @settings.portal_name, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'settings[bootstrap_theme]', 'Bootstrap theme URL' %>
+      <%= text_field_tag 'settings[bootstrap_theme]', @settings.bootstrap_theme, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'settings[portal_logo]', 'Portal logo image URL' %>
+      <%= text_field_tag 'settings[portal_logo]', @settings.portal_logo, :class => 'form-control' %>
+    </div>
+
+
+    <%= submit_tag "Save", :class => 'btn btn-primary' %>
+<% end %>

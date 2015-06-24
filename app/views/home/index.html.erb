@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1><%= image_tag('taverna_logo.png') %><%= PORTAL_NAME %></h1>
+  <h1><%= image_tag(TavernaPlayerPortal.settings.portal_logo) %><%= TavernaPlayerPortal.settings.portal_name %></h1>
   <p>Upload and run Taverna workflows</p>
   <p>
     <%= link_to 'Take me to the workflows »', workflows_path, :class => 'btn btn-lg btn-primary'-%>

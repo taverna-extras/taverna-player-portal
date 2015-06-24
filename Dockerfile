@@ -26,7 +26,7 @@ RUN bundle exec rake db:migrate
 
 # Config
 RUN cp config/initializers/secret_token.rb.example config/initializers/secret_token.rb
-RUN cp config/initializers/portal_configuration.rb.example config/initializers/portal_configuration.rb
+RUN cp config/settings.yml.example config/settings.yml
 RUN cp config/initializers/taverna_server.rb.example config/initializers/taverna_server.rb
 
 # Assets (CSS/JS)
