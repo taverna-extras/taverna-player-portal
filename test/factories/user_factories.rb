@@ -7,6 +7,12 @@ FactoryGirl.define do
   end
 
   factory :admin, :parent => :user do
+    name "Adam Ministrator"
     admin true
+  end
+
+  factory :non_admin, :parent => :user do
+    name "Simple Simon"
+    admin false
   end
 end

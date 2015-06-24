@@ -23,6 +23,6 @@ class User < ActiveRecord::Base
   private
 
   def first_user_admin
-    self.admin = true if User.count == 0
+    self.admin = true if !self.admin_changed? && User.count == 0
   end
 end
