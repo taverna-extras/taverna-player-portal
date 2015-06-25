@@ -4,7 +4,7 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module TavernaPlayerPortal
   class Application < Rails::Application
@@ -23,5 +23,8 @@ module TavernaPlayerPortal
     config.autoload_paths += %W(#{config.root}/lib)
 
     config.action_dispatch.default_headers["X-Frame-Options"] = "ALLOWALL"
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
