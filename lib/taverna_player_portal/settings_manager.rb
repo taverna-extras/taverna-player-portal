@@ -10,7 +10,7 @@ module TavernaPlayerPortal
     DEFAULT_SETTINGS_PATH = Rails.root.join('config', 'settings.yml.example')
 
     def load
-      self.copy_defaults unless File.exist?(SETTINGS_PATH)
+      self.class.copy_defaults unless File.exist?(SETTINGS_PATH)
 
       @hash = YAML.load_file(SETTINGS_PATH)
       TavernaPlayerPortal.settings = OpenStruct.new(@hash)
@@ -22,7 +22,7 @@ module TavernaPlayerPortal
     end
 
     def reset
-      self.copy_defaults
+      self.class.copy_defaults
       load
     end
 
