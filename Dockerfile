@@ -1,5 +1,5 @@
 # Base
-FROM ruby:2.1.2
+FROM ruby:2.2.2
 
 # Packages
 RUN apt-get update -qq && apt-get install -y build-essential
@@ -42,3 +42,4 @@ ENTRYPOINT ["/taverna-player-portal/docker/entrypoint.sh"]
 VOLUME ["/taverna-player-portal/db/sqlite", "/taverna-player-portal/public/system", "/taverna-player-portal/config", "/taverna-player-portal/log"]
 
 CMD ["rails", "server"]
+
