@@ -1,7 +1,7 @@
 class WorkflowsController < ApplicationController
 
-  before_action :set_workflow_and_auth, :only => [:show, :edit, :update, :destroy, :download]
-  before_action :check_logged_in?, :only => [:new, :create]
+  before_action :set_workflow_and_auth, only: [:show, :edit, :update, :destroy, :download]
+  before_action :check_logged_in?, only: [:new, :create]
 
   def index
     @workflows = Workflow.with_permissions(current_user, :view).page(params[:page])
@@ -20,7 +20,7 @@ class WorkflowsController < ApplicationController
   end
 
   def download
-    send_file @workflow.document.path, :type => Workflow.mime_type, :filename => @workflow.document.original_filename
+    send_file @workflow.document.path, type: Workflow.mime_type, filename: @workflow.document.original_filename
   end
 
   def create
@@ -66,8 +66,8 @@ class WorkflowsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def workflow_params
-    p = params.require(:workflow).permit(:document, :title, :description, :policy_attributes => [:id, :public_permissions => []])
-    p = p.merge(:user_id => current_user.id) if user_signed_in?
+    p = params.require(:workflow).permit(:document, :title, :description, policy_attributes: [:id, public_permissions: []])
+    p = p.merge(user_id: current_user.id) if user_signed_in?
     p
   end
 end

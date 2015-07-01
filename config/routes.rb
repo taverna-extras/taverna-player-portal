@@ -1,7 +1,7 @@
 TavernaPlayerPortal::Application.routes.draw do
 
   # Mount Taverna Player at the root of this application.
-  mount TavernaPlayer::Engine, :at => "/"
+  mount TavernaPlayer::Engine, at: "/"
 
   devise_for :users
 
@@ -15,13 +15,13 @@ TavernaPlayerPortal::Application.routes.draw do
     end
 
     # Nest the Taverna Player runs in the workflow resource.
-    resources :runs, :controller => 'taverna_player/runs'
+    resources :runs, controller: 'taverna_player/runs'
   end
 
   get "admin/settings"
   put "admin/update_settings"
 
   # This application adds the ability to edit runs so specify that here.
-  resources :runs, :controller => 'taverna_player/runs', :only => ['edit', 'update']
+  resources :runs, controller: 'taverna_player/runs', only: ['edit', 'update']
 
 end

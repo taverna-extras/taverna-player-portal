@@ -19,9 +19,9 @@ TavernaPlayer.setup do |config|
     # This is a method that returns a list of descriptions of the workflow
     # inputs. Each description should be of the form:
     #  {
-    #    :name => "<input_name>",
-    #    :description => "<input_description>",
-    #    :example => "<input_example_value>"
+    #    name: "<input_name>",
+    #    description: "<input_description>",
+    #    example: "<input_example_value>"
     #  }
     #
     # If you don't provide this method you will have to override the new run

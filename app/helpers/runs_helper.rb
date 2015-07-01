@@ -19,7 +19,7 @@ module RunsHelper
         return image_tag('spinner.gif')
     end
 
-    content_tag('span', nil, :class => "glyphicon #{icon} #{colour}",
-                :title => run.saved_state.to_s.humanize)
+    content_tag('span', nil, class: "glyphicon #{icon} #{colour}",
+                title: run.saved_state.to_s.humanize)
   end
 end

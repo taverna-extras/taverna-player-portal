@@ -1,6 +1,6 @@
 class Policy < ActiveRecord::Base
 
-  has_many :permissions, :dependent => :destroy
+  has_many :permissions, dependent: :destroy
 
   def permits?(user, action)
     mask = Authorization.to_mask([Authorization.privilege_for_action(action)])

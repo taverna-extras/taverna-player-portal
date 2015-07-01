@@ -23,7 +23,7 @@ class AdminControllerTest < ActionController::TestCase
   test "should update settings if admin" do
     sign_in create(:admin)
 
-    patch :update_settings, :settings => {:portal_name => 'Fish'}
+    patch :update_settings, settings: {portal_name: 'Fish'}
 
     assert_redirected_to admin_settings_url
     assert_equal 'Fish', TavernaPlayerPortal.settings.portal_name
@@ -33,7 +33,7 @@ class AdminControllerTest < ActionController::TestCase
     sign_in create(:non_admin)
     old_name = TavernaPlayerPortal.settings.portal_name
 
-    patch :update_settings, :settings => {:portal_name => 'Fish'}
+    patch :update_settings, settings: {portal_name: 'Fish'}
 
     assert_response :unauthorized
     assert_equal old_name, TavernaPlayerPortal.settings.portal_name

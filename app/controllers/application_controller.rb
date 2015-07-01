@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def authorize(condition)
     unless condition
-      render 'errors/unauthorized', :status => :unauthorized
+      render 'errors/unauthorized', status: :unauthorized
     end
   end
 

@@ -25,8 +25,8 @@ class AuthorizationTest < ActionDispatch::PerformanceTest
         user
       end
 
-      factory :private_dummy, :parent => :dummy do
-        association :policy, :factory => :private_policy
+      factory :private_dummy, parent: :dummy do
+        association :policy, factory: :private_policy
       end
     end
 

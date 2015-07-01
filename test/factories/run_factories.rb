@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :run, :class => 'TavernaPlayer::Run' do
+  factory :run, class: 'TavernaPlayer::Run' do
     user
     workflow
   end

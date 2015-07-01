@@ -14,7 +14,7 @@ module TavernaPlayer
     end
 
     test "should get create form" do
-      get :new, :workflow_id => create(:workflow).id
+      get :new, workflow_id: create(:workflow).id
 
       assert_response :success
     end
@@ -24,7 +24,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in run.user
 
-      get :edit, :id => run.id
+      get :edit, id: run.id
 
       assert_response :success
     end
@@ -33,7 +33,7 @@ module TavernaPlayer
       @routes = TavernaPlayerPortal::Application.routes
       run = create(:run)
 
-      get :edit, :id => run.id
+      get :edit, id: run.id
 
       assert_response :unauthorized
     end
@@ -43,7 +43,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in create(:admin)
 
-      get :edit, :id => run.id
+      get :edit, id: run.id
 
       assert_response :success
     end
@@ -52,9 +52,9 @@ module TavernaPlayer
       user = create(:user)
       sign_in user
 
-      post :create, :run => {
-        :name => 'Test', :workflow_id => create(:workflow).id,
-        :inputs_attributes => [{:name => 'simple_input', :value => 'hello'}]
+      post :create, run: {
+        name: 'Test', workflow_id: create(:workflow).id,
+        inputs_attributes: [{name: 'simple_input', value: 'hello'}]
       }
 
       assert_redirected_to assigns(:run)
@@ -62,9 +62,9 @@ module TavernaPlayer
     end
 
     test "should create run as anonymous user" do
-      post :create, :run => {
-        :name => 'Test', :workflow_id => create(:workflow).id,
-        :inputs_attributes => [{:name => 'simple_input', :value => 'hello'}]
+      post :create, run: {
+        name: 'Test', workflow_id: create(:workflow).id,
+        inputs_attributes: [{name: 'simple_input', value: 'hello'}]
       }
 
       assert_redirected_to assigns(:run)
@@ -75,7 +75,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in run.user
 
-      patch :update, :id => run.id, :run => {:name => 'New title'}
+      patch :update, id: run.id, run: {name: 'New title'}
 
       assert_redirected_to run_url(run)
       assert_equal 'New title', assigns(:run).name
@@ -87,7 +87,7 @@ module TavernaPlayer
 
       old_title = run.name
 
-      patch :update, :id => run.id, :run => {:name => 'New title'}
+      patch :update, id: run.id, run: {name: 'New title'}
 
       assert_response :unauthorized
       assert_equal old_title, assigns(:run).name
@@ -97,7 +97,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in create(:admin)
 
-      patch :update, :id => run.id, :run => {:name => 'New title'}
+      patch :update, id: run.id, run: {name: 'New title'}
 
       assert_redirected_to run_url(run)
       assert_equal 'New title', assigns(:run).name
@@ -108,7 +108,7 @@ module TavernaPlayer
       sign_in run.user
 
       request.env["HTTP_REFERER"] = run_url(run)
-      delete :destroy, :id => run.id
+      delete :destroy, id: run.id
 
       assert_redirected_to run_url(run)
     end
@@ -117,7 +117,7 @@ module TavernaPlayer
       run = create(:run)
       sign_in create(:user)
 
-      delete :destroy, :id => run.id
+      delete :destroy, id: run.id
 
       assert_response :unauthorized
     end
@@ -127,7 +127,7 @@ module TavernaPlayer
       sign_in create(:admin)
 
       request.env["HTTP_REFERER"] = run_url(run)
-      delete :destroy, :id => run.id
+      delete :destroy, id: run.id
 
       assert_redirected_to run_url(run)
     end

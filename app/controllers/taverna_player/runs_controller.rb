@@ -21,7 +21,7 @@ class TavernaPlayer::RunsController < ApplicationController
   alias_method :old_find_run, :find_run
 
   def update_params
-    params.require(:run).permit(:name, :policy_attributes => [:id, :public_permissions => []])
+    params.require(:run).permit(:name, policy_attributes: [:id, public_permissions: []])
   end
 
   def run_params
@@ -29,13 +29,13 @@ class TavernaPlayer::RunsController < ApplicationController
       :create_time, :delayed_job, :embedded, :finish_time, :inputs_attributes,
       :log, :name, :parent_id, :results, :run_id, :start_time,
       :status_message_key, :user_id, :workflow_id,
-      :inputs_attributes => [:depth, :file, :metadata, :name, :value],
-      :policy_attributes => [:id, :public_permissions => []]
+      inputs_attributes: [:depth, :file, :metadata, :name, :value],
+      policy_attributes: [:id, public_permissions: []]
     )
   end
 
   def find_runs
-    select = { :embedded => false }
+    select = { embedded: false }
     select[:workflow_id] = params[:workflow_id] if params[:workflow_id]
     @runs = TavernaPlayer::Run.where(select).order("created_at DESC").with_permissions(current_user, :view).page(params[:page])
   end

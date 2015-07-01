@@ -6,12 +6,12 @@ FactoryGirl.define do
     password_confirmation "12345678xyz"
   end
 
-  factory :admin, :parent => :user do
+  factory :admin, parent: :user do
     name "Adam Ministrator"
     admin true
   end
 
-  factory :non_admin, :parent => :user do
+  factory :non_admin, parent: :user do
     name "Simple Simon"
     admin false
   end

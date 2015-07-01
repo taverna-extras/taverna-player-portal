@@ -3,8 +3,8 @@ module Authorization
   # Assumes including class has a "user" attribute
 
   PRIVILEGES = {
-      :view => 1,
-      :edit => 2
+      view: 1,
+      edit: 2
   }
 
   ## Gets a list of privileges from a bitmask
@@ -29,14 +29,14 @@ module Authorization
                (permissions.mask & :mask = :mask AND permissions.subject_type = 'User' AND permissions.subject_id = :user) OR
                (permissions.mask & :mask = :mask AND permissions.subject_type = 'Group' AND permissions.subject_id IN (:groups)) OR
                (policies.public_mask & :mask = :mask)",
-              :mask => mask,
-              :user => user,
-              :groups => user.try(:groups) || []).references(:policy, :permissions)
+              mask: mask,
+              user: user,
+              groups: user.try(:groups) || []).references(:policy, :permissions)
       }
 
       scope :visible_by, lambda { |user| with_permissions(user, :view) }
 
-      belongs_to :policy, :dependent => :destroy
+      belongs_to :policy, dependent: :destroy
 
       accepts_nested_attributes_for :policy
 
@@ -72,7 +72,7 @@ module Authorization
   end
 
   def default_policy
-    Policy.new(:title => 'Default Public Policy', :public_permissions => [:view])
+    Policy.new(title: 'Default Public Policy', public_permissions: [:view])
   end
 
 end
