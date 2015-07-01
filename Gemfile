@@ -51,7 +51,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.1.1'
 
 # Attachments
-gem "paperclip"
+gem 'paperclip'
 
 # Parsing t2flow
 gem 'taverna-t2flow'
@@ -64,14 +64,15 @@ gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
 group :test do
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'rails-perftest'
   gem 'ruby-prof'
-  gem "temping"
+  gem 'temping'
   gem 'coveralls', require: false
 end
 
-
 group :development do
   gem 'spring'
+  gem 'rubocop'
 end
+
