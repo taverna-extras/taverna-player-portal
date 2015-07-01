@@ -14,9 +14,9 @@ class Workflow < ActiveRecord::Base
   has_many :runs, class_name: 'TavernaPlayer::Run', dependent: :destroy
 
   has_attached_file :document
-  has_attached_file :diagram, styles: { thumb: ["100x100#", :jpg],
-                                           large: ["400x400>", :jpg]
-  }, default_url: "/images/:style/missing.png"
+  has_attached_file :diagram, styles: { thumb: ['100x100#', :jpg],
+                                           large: ['400x400>', :jpg]
+  }, default_url: '/images/:style/missing.png'
 
   validates :title, presence: true
   validates :user, presence: true
@@ -28,7 +28,7 @@ class Workflow < ActiveRecord::Base
   before_validation :parse_workflow_document
 
   def self.mime_type
-    "application/vnd.taverna.t2flow+xml"
+    'application/vnd.taverna.t2flow+xml'
   end
 
   def file_path

@@ -25,7 +25,7 @@ module Authorization
         mask = Authorization.to_mask(privileges)
         joins("LEFT OUTER JOIN 'policies' ON 'policies'.'id' = '#{self.table_name}'.'policy_id'
                LEFT OUTER JOIN 'permissions' ON 'permissions'.'policy_id' = 'policies'.'id'").
-        where("(#{self.table_name}.user_id #{(user.nil? ? "IS NULL" : "= :user")}) OR
+        where("(#{self.table_name}.user_id #{(user.nil? ? 'IS NULL' : '= :user')}) OR
                (permissions.mask & :mask = :mask AND permissions.subject_type = 'User' AND permissions.subject_id = :user) OR
                (permissions.mask & :mask = :mask AND permissions.subject_type = 'Group' AND permissions.subject_id IN (:groups)) OR
                (policies.public_mask & :mask = :mask)",

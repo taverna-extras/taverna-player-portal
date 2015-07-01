@@ -2,12 +2,12 @@ Metrics/LineLength:
   Max: 119
 
 AllCops:
+  RunRailsCops: true
   Include:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    - 'bin/**/*'
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
-    - !ruby/regexp /old_and_unused\.rb$/
-

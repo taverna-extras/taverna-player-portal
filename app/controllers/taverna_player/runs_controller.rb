@@ -37,7 +37,7 @@ class TavernaPlayer::RunsController < ApplicationController
   def find_runs
     select = { embedded: false }
     select[:workflow_id] = params[:workflow_id] if params[:workflow_id]
-    @runs = TavernaPlayer::Run.where(select).order("created_at DESC").with_permissions(current_user, :view).page(params[:page])
+    @runs = TavernaPlayer::Run.where(select).order('created_at DESC').with_permissions(current_user, :view).page(params[:page])
   end
 
   def find_run

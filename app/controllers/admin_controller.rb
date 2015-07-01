@@ -11,7 +11,7 @@ class AdminController < ApplicationController
     TavernaPlayerPortal.settings_manager.save
     @settings = TavernaPlayerPortal.settings
 
-    flash[:notice] = "Settings updated"
+    flash[:notice] = 'Settings updated'
     redirect_to admin_settings_path
   end
 
