@@ -4,16 +4,27 @@
     <div class="form-group">
       <%= label_tag 'settings[portal_name]', 'Portal name' %>
       <%= text_field_tag 'settings[portal_name]', @settings.portal_name, :class => 'form-control' %>
+      <p class="help-block">
+        The name of this portal deployment, which will appear in the navigation bar and the home page.
+      </p>
     </div>
 
     <div class="form-group">
       <%= label_tag 'settings[bootstrap_theme]', 'Bootstrap theme URL' %>
       <%= text_field_tag 'settings[bootstrap_theme]', @settings.bootstrap_theme, :class => 'form-control' %>
+      <p class="help-block">
+        An optional URL to a CSS file containing a Bootstrap theme, for example as found on
+        <a href="http://www.bootstrapcdn.com/#bootswatch" target="_blank">
+            http://www.bootstrapcdn.com/#bootswatch</a>.
+      </p>
     </div>
 
     <div class="form-group">
       <%= label_tag 'settings[portal_logo]', 'Portal logo image URL' %>
       <%= text_field_tag 'settings[portal_logo]', @settings.portal_logo, :class => 'form-control' %>
+      <p class="help-block">
+        A URL or path to a logo image, which will appear on the home page.
+      </p>
     </div>
 
 
