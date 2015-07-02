@@ -41,5 +41,5 @@ ENTRYPOINT ["/taverna-player-portal/docker/entrypoint.sh"]
 # Shared
 VOLUME ["/taverna-player-portal/db/sqlite", "/taverna-player-portal/public/system", "/taverna-player-portal/config", "/taverna-player-portal/log"]
 
-CMD ["rails", "server"]
+CMD ["rails", "server", "-b 0.0.0.0"]
 
