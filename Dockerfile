@@ -8,7 +8,7 @@ RUN apt-get -y install sqlite libsqlite3-dev
 # To parse t2flows:
 RUN apt-get install -y libxml2-dev libxslt1-dev
 # To generate t2flow images
-RUN apt-get install -y libtool libmagickwand-dev graphviz ImageMagick
+RUN apt-get install -y libtool libmagickwand-dev graphviz ImageMagick ghostscript
 RUN apt-get install -y nodejs
 
 # Environment
