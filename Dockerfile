@@ -16,7 +16,7 @@ ADD . /taverna-player-portal
 WORKDIR /taverna-player-portal
 ENV RAILS_ENV production
 ## Assume Taverna server linked as "taverna"
-ENV TAVERNA_SERVER_URL http://taverna:8080/
+ENV TAVERNA_SERVER_URL http://taverna:8080
 ENV TAVERNA_SERVER_USERNAME taverna
 ENV TAVERNA_SERVER_PASSWORD taverna
 ENV RAILS_SERVE_STATIC_FILES true
