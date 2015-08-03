@@ -21,6 +21,8 @@ TavernaPlayerPortal::Application.routes.draw do
   get "admin/settings"
   put "admin/update_settings"
 
+  resources :folders
+
   # This application adds the ability to edit runs so specify that here.
   resources :runs, controller: 'taverna_player/runs', only: ['edit', 'update']
 
