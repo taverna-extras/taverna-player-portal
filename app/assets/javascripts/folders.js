@@ -13,6 +13,7 @@
                     e.preventDefault();
                     $(this).addClass(settings.movingClass);
                     grabbed = $(this);
+                    return false;
                 });
             });
         }
@@ -20,7 +21,7 @@
         else if (action == 'drop') {
             return this.each(function() {
                 $(this).mouseover(function () {
-                    if(grabbed != null && $(this).has(grabbed).length == 0) {
+                    if(grabbed != null && !grabbed.is($(this)) && !grabbed.parent().is($(this))) {
                         $(this).addClass(settings.highlightClass);
                         ghostNode = grabbed.clone().addClass(settings.ghostClass);
                         $(this).append(ghostNode);
@@ -33,13 +34,10 @@
                     }
                 }).mouseup(function () {
                     if(grabbed != null) {
-                        grabbed.removeClass('moving');
-                        grabbed.detach().appendTo($(this));
-                        if(ghostNode != null) {
-                            ghostNode.remove();
-                            ghostNode = null;
+                        if(!grabbed.is($(this)) && !grabbed.parent().is($(this))) {
+                            grabbed.detach().appendTo($(this));
+                            settings.dropCallback(grabbed, $(this));
                         }
-                        settings.dropCallback(grabbed, $(this));
                     }
                 });
             });
@@ -47,9 +45,28 @@
     };
 
     $(window).mouseup(function () {
-        grabbed = null;
+        if(grabbed != null) {
+            grabbed.removeClass('moving');
+            if(ghostNode != null) {
+                ghostNode.remove();
+                ghostNode = null;
+            }
+            grabbed = null;
+        }
     });
-
     var grabbed = null;
     var ghostNode = null;
 }( jQuery ));
+
+$(document).ready(function () {
+    $('.folder-entry').dragonDrop('drag');
+    $('.folder').dragonDrop('drop', {
+        dropCallback: function(drag,drop) {
+            $.ajax("/folders/" + drop.data('folder-id'),
+                { type:'PUT',
+                    dataType:'json',
+                    data: {entry_id: drag.data('entry-id')}}
+            );
+        }
+    });
+});

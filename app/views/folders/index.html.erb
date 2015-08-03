@@ -3,27 +3,10 @@
       <div class="folder-name">
         <span class="glyphicon glyphicon-folder-open"></span> <%= folder.name %>
       </div>
-      <div class="folder-contents">
-        <% folder.entries.each do |entry| %>
-            <div class="folder-entry" data-entry-id="<%= entry.id -%>">
-              <%= run_state_icon(entry.resource) -%> <%= link_to entry.resource.name, entry.resource %>
-            </div>
-        <% end %>
-      </div>
+      <% folder.entries.each do |entry| %>
+          <div class="folder-entry" data-entry-id="<%= entry.id -%>">
+            <%= run_state_icon(entry.resource) -%> <%= link_to entry.resource.name, entry.resource %>
+          </div>
+      <% end %>
     </div>
 <% end %>
-
-<script>
-    $(document).ready(function () {
-        $('.folder-entry').dragonDrop('drag');
-        $('.folder').dragonDrop('drop', {
-            dropCallback: function(drag,drop) {
-                $.ajax("/folders/" + drop.data('folder-id'),
-                        { type:'PUT',
-                          dataType:'json',
-                          data: {entry_id: drag.data('entry-id')}}
-                );
-            }
-        });
-    });
-</script>
