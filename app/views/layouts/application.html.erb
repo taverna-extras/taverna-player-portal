@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= TavernaPlayerPortal.settings.portal_name %></title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <% if TavernaPlayerPortal.settings.bootstrap_theme.blank? %>
+  <% unless TavernaPlayerPortal.settings.bootstrap_theme.blank? %>
     <%= stylesheet_link_tag TavernaPlayerPortal.settings.bootstrap_theme, media: "all", "data-turbolinks-track" => true %>
   <% end %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
