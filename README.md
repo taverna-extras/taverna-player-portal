@@ -9,7 +9,7 @@ The easiest way to get the portal up and running is to use [Docker](https://www.
 
 First, set up a taverna server container:
 
-    docker run --name taverna -p 8080:8080 -d stain/taverna-server
+    docker run --name taverna -p 8080:8080 -d taverna/taverna-server
 
 Then set up the portal container:
 
