@@ -4,6 +4,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_devise_params, if: :devise_controller?
 
+  def runs
+    @runs = TavernaPlayer::Run.where(:user => params[:user_id]).order('created_at DESC').with_permissions(current_user, :view).page(params[:page])
+    respond_to do |format|
+      format.json { render json: @runs}
+      format.xml { render xml: @runs}
+    end
+
+  end
+
   protected
 
   def check_logged_in?
