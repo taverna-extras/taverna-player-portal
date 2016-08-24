@@ -24,4 +24,8 @@ TavernaPlayerPortal::Application.routes.draw do
   # This application adds the ability to edit runs so specify that here.
   resources :runs, controller: 'taverna_player/runs', only: ['edit', 'update']
 
+  resources :users, controller: 'application', :defaults => { :format => :json } do
+    get 'runs'
+  end
+
 end
