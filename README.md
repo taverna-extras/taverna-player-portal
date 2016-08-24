@@ -37,6 +37,8 @@ Then run (you may need to restart your terminal first)
     
 #### Install gems
 
+    gem install bundler
+
     bundle install
     
 #### Taverna Server configuration
