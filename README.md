@@ -62,3 +62,43 @@ To start the DelayedJob worker, which handles asynchronous tasks such as polling
     rake jobs:work
     
 *Note: remember to restart the worker to reflect any back-end code changes*
+
+## API
+
+The portal has a basic API (provided by Rails) for query and uploading workflows.
+
+### Authentication
+
+The API uses HTTP Basic authentication, where the username is your email address, and the password is your password. Actions such as uploading a workflow require authentication. Other actions can be perform anonymously.
+
+### Workflows
+
+#### Listing workflows
+
+    GET /workflows.json
+    
+#### Fetching a workflow's metadata
+
+    GET /workflows/1.json
+    
+Where the ID of the workflow is `1`
+
+#### Uploading a workflow
+
+    POST /workflows.json
+    
+Where the body of the POST is a JSON document, structured as follows:
+
+    { "workflow" : { "document" : "data:application/octet-stream;base64,<<<workflow here>>>" } }
+    
+Where `<<<workflow here>>>` is a Base64 encoded T2Flow workflow.
+
+Make sure to set the `Content-Type` of your request to `application/json`.
+
+##### Example using curl
+
+    curl -u joebloggs@example.com -X POST -H "Content-Type: application/json" -d@my_post_body.json http://localhost:3000/workflows.json 
+
+### Runs
+
+The workflow run API is provided by Taverna Player, and is documented here: https://github.com/myGrid/taverna-player/wiki/JSON-API-Documentation
