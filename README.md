@@ -65,7 +65,7 @@ To start the DelayedJob worker, which handles asynchronous tasks such as polling
 
 ## API
 
-The portal has a basic API (provided by Rails) for query and uploading workflows.
+The portal has a basic API (provided by Rails) for listing and uploading workflows.
 
 ### Authentication
 
