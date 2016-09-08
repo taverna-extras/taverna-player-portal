@@ -19,8 +19,7 @@ Then set up the portal container:
 ### Ubuntu 14.04 (or similar)
 Install required packages
 
-    sudo apt-get install sqlite libsqlite3-dev libxml2-dev libxslt1-dev libtool \ 
-                         libmagickwand-dev graphviz ImageMagick ghostscript nodejs git
+    sudo apt-get install sqlite libsqlite3-dev libxml2-dev libxslt1-dev libtool libmagickwand-dev graphviz ImageMagick ghostscript nodejs git
                          
 #### Install Ruby 2.2.2
 
